@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import churchImg from '../assets/aickibera-church-image.png';
 import choirImg1 from '../assets/ambassadors-choir.png';
 import choirImg2 from '../assets/kiswahili-choir.png';

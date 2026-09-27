@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './SecureImage.css';
 
 export default function SecureImage({ src, alt, watermarkText = "A.I.C. KIBERA SECURED" }) {

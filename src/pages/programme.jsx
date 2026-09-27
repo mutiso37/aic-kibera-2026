@@ -73,7 +73,6 @@ export default function Programme() {
         return () => clearInterval(interval);
     }, []);
 
-    const currentSlideData = choirSlides[currentSlide];
 
     const processPhoto = (file) => {
         if (!file) return;

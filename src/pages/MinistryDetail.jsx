@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -145,9 +144,12 @@ const standardRules = [
 ];
 
 export default function MinistryDetail({ ministry: propMinistry }) {
-    const params = useParams();
-    const ministry = propMinistry || params.ministry;
-    const data = ministryData[ministry];
+    const { ministry: routeMinistry } = useParams();
+    
+    // Normalize to lowercase to prevent case-sensitivity mismatches in URLs
+    const rawMinistry = propMinistry || routeMinistry || '';
+    const ministryKey = rawMinistry.toLowerCase();
+    const data = ministryData[ministryKey];
 
     if (!data) {
         return (
@@ -155,14 +157,32 @@ export default function MinistryDetail({ ministry: propMinistry }) {
                 <Navbar />
                 <main className="ministry-not-found">
                     <div className="container">
-                        <h1>Ministry Not Found</h1>
-                        <p>The ministry you are looking for could not be found.</p>
-                        <Link to="/ministries" className="btn-primary">
-                            Return to Ministries
-                        </Link>
+                        <div className="not-found-content">
+                            <div className="not-found-icon">
+                                <i className="fa-solid fa-church"></i>
+                            </div>
+
+                            <span className="section-kicker">
+                                A.I.C. KIBERA
+                            </span>
+
+                            <h1>Ministry Not Found</h1>
+
+                            <p>
+                                The ministry you are looking for could not be found.
+                                Please return to the Ministries page and select an
+                                available ministry.
+                            </p>
+
+                            <Link to="/ministries" className="btn-primary">
+                                <i className="fa-solid fa-arrow-left"></i>
+                                Return to Ministries
+                            </Link>
+                        </div>
                     </div>
                 </main>
                 <Footer />
+                <WhatsAppFloat />
             </>
         );
     }
@@ -172,229 +192,368 @@ export default function MinistryDetail({ ministry: propMinistry }) {
             <Navbar />
 
             <main className="ministry-detail-page">
-                {/* HERO */}
+
                 <section className="ministry-detail-hero">
                     <div
                         className="ministry-detail-bg"
-                        style={{ backgroundImage: `url("${data.image}")` }}
-                    />
-                    <div className="ministry-detail-overlay" />
+                        style={{
+                            backgroundImage: `url("${data.image}")`
+                        }}
+                    ></div>
+
+                    <div className="ministry-detail-overlay"></div>
+
                     <div className="container ministry-detail-content">
                         <div className="ministry-detail-icon">
                             <i className={`fa-solid ${data.icon}`}></i>
                         </div>
+
                         <span className="eyebrow-light">
                             A.I.C. KIBERA MINISTRY
                         </span>
+
                         <h1>{data.title}</h1>
+
                         <p>{data.intro}</p>
                     </div>
                 </section>
 
-                {/* ABOUT */}
                 <section className="ministry-about">
                     <div className="container ministry-two-column">
-                        <div>
+
+                        <div className="ministry-about-text">
                             <span className="section-kicker">
                                 ABOUT THE MINISTRY
                             </span>
+
                             <h2>Serving God Together</h2>
+
                             <p>{data.intro}</p>
-                        </div>
-                        <div className="ministry-quote-box">
-                            <i className="fa-solid fa-quote-left"></i>
+
                             <p>
-                                Serving together, growing together and building one another in Christ.
+                                This ministry provides opportunities for members
+                                to grow spiritually, build meaningful relationships
+                                and contribute their gifts to the work of God and
+                                the A.I.C. Kibera church family.
                             </p>
                         </div>
+
+                        <div className="ministry-quote-box">
+                            <i className="fa-solid fa-quote-left"></i>
+
+                            <p>
+                                Serving together, growing together and building
+                                one another in Christ.
+                            </p>
+
+                            <span>A.I.C. Kibera</span>
+                        </div>
+
                     </div>
                 </section>
 
-                {/* PURPOSE */}
                 <section className="ministry-purpose">
                     <div className="container">
+
+                        <div className="section-heading-center">
+                            <span className="section-kicker">
+                                OUR PURPOSE
+                            </span>
+
+                            <h2>Vision, Mission &amp; Aim</h2>
+                        </div>
+
                         <div className="ministry-purpose-grid">
+
                             <div className="purpose-card">
-                                <i className="fa-solid fa-eye"></i>
+                                <div className="purpose-icon">
+                                    <i className="fa-solid fa-eye"></i>
+                                </div>
+
                                 <span>VISION</span>
+
                                 <h3>Our Vision</h3>
+
                                 <p>{data.vision}</p>
                             </div>
+
                             <div className="purpose-card">
-                                <i className="fa-solid fa-bullseye"></i>
+                                <div className="purpose-icon">
+                                    <i className="fa-solid fa-bullseye"></i>
+                                </div>
+
                                 <span>MISSION</span>
+
                                 <h3>Our Mission</h3>
+
                                 <p>{data.mission}</p>
                             </div>
+
                             <div className="purpose-card">
-                                <i className="fa-solid fa-heart"></i>
+                                <div className="purpose-icon">
+                                    <i className="fa-solid fa-heart"></i>
+                                </div>
+
                                 <span>AIM</span>
+
                                 <h3>Our Aim</h3>
+
                                 <p>{data.aim}</p>
                             </div>
+
                         </div>
                     </div>
                 </section>
 
-                {/* ACTIVITIES */}
                 <section className="ministry-activities">
                     <div className="container">
+
                         <div className="section-heading-center">
                             <span className="section-kicker">
                                 WHAT WE DO
                             </span>
+
                             <h2>Ministry Activities</h2>
+
+                            <p>
+                                These are some of the key activities through which
+                                this ministry serves A.I.C. Kibera.
+                            </p>
                         </div>
+
                         <div className="activities-grid">
                             {data.activities.map((activity, index) => (
-                                <div className="activity-card" key={activity}>
-                                    <span>{String(index + 1).padStart(2, '0')}</span>
-                                    <i className="fa-solid fa-check"></i>
+                                <div className="activity-card" key={`${activity}-${index}`}>
+                                    <span className="activity-number">
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
+
+                                    <div className="activity-icon">
+                                        <i className="fa-solid fa-check"></i>
+                                    </div>
+
                                     <h3>{activity}</h3>
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 </section>
 
-                {/* LEADERSHIP */}
                 <section className="ministry-leadership">
                     <div className="container">
+
                         <div className="section-heading-center">
                             <span className="section-kicker">
                                 LEADERSHIP
                             </span>
+
                             <h2>Ministry Leadership</h2>
+
                             <p>
                                 Official leadership information and photographs
-                                will be added after confirmation by A.I.C.
-                                Kibera administration.
+                                will be added after confirmation by A.I.C. Kibera
+                                administration.
                             </p>
                         </div>
+
                         <div className="generic-leadership-grid">
+
                             <div className="generic-leader-card">
                                 <div className="generic-leader-photo">
                                     <i className="fa-solid fa-user"></i>
                                 </div>
+
                                 <span>MINISTRY LEADER</span>
+
                                 <h3>Name to be confirmed</h3>
                             </div>
+
                             <div className="generic-leader-card">
                                 <div className="generic-leader-photo">
                                     <i className="fa-solid fa-user"></i>
                                 </div>
+
                                 <span>ASSISTANT LEADER</span>
+
                                 <h3>Name to be confirmed</h3>
                             </div>
+
                             <div className="generic-leader-card">
                                 <div className="generic-leader-photo">
                                     <i className="fa-solid fa-user"></i>
                                 </div>
+
                                 <span>SECRETARY</span>
+
                                 <h3>Name to be confirmed</h3>
                             </div>
+
                             <div className="generic-leader-card">
                                 <div className="generic-leader-photo">
                                     <i className="fa-solid fa-user"></i>
                                 </div>
+
                                 <span>TREASURER</span>
+
                                 <h3>Name to be confirmed</h3>
                             </div>
+
                         </div>
                     </div>
                 </section>
 
-                {/* GALLERY */}
                 <section className="ministry-gallery">
                     <div className="container">
+
                         <div className="section-heading-center">
                             <span className="section-kicker">
                                 MEMORABLE MOMENTS
                             </span>
+
                             <h2>Ministry Memories</h2>
+
+                            <p>
+                                Ministry photographs can be added here as
+                                activities and events take place.
+                            </p>
                         </div>
+
                         <div className="generic-gallery-grid">
+
                             {[1, 2, 3].map((number) => (
                                 <div className="gallery-placeholder" key={number}>
                                     <SecureImage
                                         src={data.image}
                                         alt={`${data.title} memory ${number}`}
-                                        watermarkText="A.I.C. KIBERA SECURED"
+                                        watermarkText="A.I.C. KIBERA"
                                     />
+
+                                    <div className="gallery-overlay">
+                                        <span>A.I.C. KIBERA</span>
+
+                                        <i className="fa-solid fa-image"></i>
+
+                                        <p>Ministry Memory</p>
+                                    </div>
                                 </div>
                             ))}
+
                         </div>
                     </div>
                 </section>
 
-                {/* VIDEO */}
                 <section className="ministry-video">
                     <div className="container">
+
                         <div className="section-heading-center">
                             <span className="section-kicker">
                                 VIDEO MEMORIES
                             </span>
-                            <h2>Ministry Reels & Videos</h2>
-                            <p>Videos will play when selected by the visitor.</p>
+
+                            <h2>Ministry Reels &amp; Videos</h2>
+
+                            <p>
+                                Select a video to play it. Videos do not autoplay.
+                            </p>
                         </div>
+
                         <div className="video-placeholder-grid">
+
                             {[1, 2, 3].map((number) => (
                                 <button
                                     className="video-placeholder"
                                     key={number}
                                     type="button"
+                                    onClick={() => {
+                                        alert(`Ministry video ${number} will be added here.`);
+                                    }}
                                 >
-                                    <i className="fa-solid fa-circle-play"></i>
-                                    <span>Play Ministry Video</span>
+                                    <span className="video-play-icon">
+                                        <i className="fa-solid fa-play"></i>
+                                    </span>
+
+                                    <span className="video-title">
+                                        Play Ministry Video
+                                    </span>
+
+                                    <span className="video-subtitle">
+                                        Video {number}
+                                    </span>
                                 </button>
                             ))}
+
                         </div>
                     </div>
                 </section>
 
-                {/* RULES */}
                 <section className="ministry-rules">
                     <div className="container">
+
                         <div className="section-heading-center">
                             <span className="section-kicker">
                                 MINISTRY STANDARDS
                             </span>
-                            <h2>Rules & Regulations</h2>
+
+                            <h2>Rules &amp; Regulations</h2>
+
+                            <p>
+                                Ministry members are expected to observe the
+                                following standards while serving within
+                                A.I.C. Kibera.
+                            </p>
                         </div>
+
                         <div className="rules-grid">
+
                             {standardRules.map((rule, index) => (
-                                <div className="standard-rule" key={rule}>
-                                    <span>{String(index + 1).padStart(2, '0')}</span>
+                                <div className="standard-rule" key={`${rule}-${index}`}>
+                                    <span className="rule-number">
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
+
                                     <i className="fa-solid fa-check"></i>
+
                                     <p>{rule}</p>
                                 </div>
                             ))}
+
                         </div>
                     </div>
                 </section>
 
-                {/* JOIN */}
                 <section className="ministry-join">
                     <div className="container">
+
                         <div className="ministry-join-box">
-                            <div>
+
+                            <div className="ministry-join-content">
                                 <span className="section-kicker">
                                     GET INVOLVED
                                 </span>
-                                <h2>Join {data.title}</h2>
+
+                                <h2>
+                                    Join {data.title}
+                                </h2>
+
                                 <p>
-                                    Use your gifts, serve others and grow
-                                    together as part of the A.I.C. Kibera
-                                    family.
+                                    Use your gifts, serve others and grow together
+                                    as part of the A.I.C. Kibera family.
                                 </p>
                             </div>
-                            <Link to="/register" className="btn-primary">
+
+                            <Link
+                                to="/registration"
+                                className="btn-primary"
+                            >
                                 Join Ministry
                                 <i className="fa-solid fa-arrow-right"></i>
                             </Link>
+
                         </div>
                     </div>
                 </section>
+
             </main>
 
             <Footer />

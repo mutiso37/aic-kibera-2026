@@ -1,522 +1,1196 @@
-import { useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 
-export default function Registration() {
-    const [submitted, setSubmitted] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
-    const [photoPreview, setPhotoPreview] = useState(null);
-    
-    // Camera state variables
-    const [cameraActive, setCameraActive] = useState(false);
-    const videoRef = useRef(null);
-    const canvasRef = useRef(null);
-    const [stream, setStream] = useState(null);
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xeaorwyz';
+const REVEREND_PHONE = '254725436394';
 
-    const [formData, setFormData] = useState({
-        fullName: '',
-        phone: '',
-        email: '',
-        gender: 'Male',
-        dob: '',
-        maritalStatus: 'Single',
-        occupation: '',
-        residence: '',
-        preferredMinistry: 'Music Ministry (Choir)',
-        isSaved: 'Yes',
-        whenSaved: '',
-        isBaptised: 'Yes',
-        baptismChurch: '',
-        baptismPastor: '',
-        baptismDate: '',
-        formerChurch: '',
-        formerPastor: '',
-        isFirstTime: 'No',
-        isFullMember: 'Yes',
-        prayerRequests: '',
-        photo: null
-    });
+const initialFormData = {
+  fullName: '',
+  phone: '',
+  email: '',
+  gender: '',
+  dob: '',
+  maritalStatus: '',
+  occupation: '',
+  residence: '',
+  preferredMinistry: '',
+  isSaved: '',
+  whenSaved: '',
+  isBaptised: '',
+  baptismChurch: '',
+  baptismPastor: '',
+  baptismDate: '',
+  formerChurch: '',
+  formerPastor: '',
+  isFirstTime: '',
+  isFullMember: '',
+  prayerRequests: '',
+  photo: null,
+};
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+const responsiveStyles = `
+  .registration-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+  }
+
+  .registration-hero {
+    padding: 100px 20px 55px;
+    text-align: center;
+    background: linear-gradient(135deg, #071a35, #123d70);
+    color: white;
+  }
+
+  .registration-hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+  }
+
+  .registration-hero p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0.95;
+  }
+
+  .registration-container {
+    width: min(1100px, 94%);
+    margin: -30px auto 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .registration-card {
+    background: white;
+    border-radius: 18px;
+    padding: clamp(20px, 4vw, 40px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    margin: 30px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e5e7eb;
+    color: #123d70;
+  }
+
+  .section-title:first-child {
+    margin-top: 0;
+  }
+
+  .reg-grid-2,
+  .reg-grid-3 {
+    display: grid;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .reg-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reg-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .reg-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+  }
+
+  .reg-label {
+    font-weight: 700;
+    color: #243447;
+  }
+
+  .reg-input,
+  .reg-select,
+  .reg-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    padding: 12px 13px;
+    font-size: 15px;
+    background: #fff;
+    color: #172033;
+    outline: none;
+  }
+
+  .reg-input:focus,
+  .reg-select:focus,
+  .reg-textarea:focus {
+    border-color: #123d70;
+    box-shadow: 0 0 0 3px rgba(18, 61, 112, 0.1);
+  }
+
+  .reg-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .required {
+    color: #c62828;
+  }
+
+  .photo-section {
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px dashed #b8c2d1;
+    border-radius: 12px;
+    background: #f8fafc;
+  }
+
+  .camera-area {
+    margin-top: 15px;
+  }
+
+  .camera-video {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 12px;
+    background: #111827;
+  }
+
+  .photo-preview {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    margin: 15px 0;
+    border: 3px solid #123d70;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .registration-button {
+    border: none;
+    border-radius: 9px;
+    padding: 13px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .registration-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .registration-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .primary-button {
+    background: #123d70;
+    color: white;
+  }
+
+  .secondary-button {
+    background: #e8eef7;
+    color: #123d70;
+  }
+
+  .danger-button {
+    background: #b42318;
+    color: white;
+  }
+
+  .success-box,
+  .error-box,
+  .info-box {
+    padding: 15px 18px;
+    border-radius: 10px;
+    margin: 18px 0;
+    line-height: 1.6;
+  }
+
+  .success-box {
+    background: #ecfdf3;
+    color: #146c43;
+    border: 1px solid #b7ebc6;
+  }
+
+  .error-box {
+    background: #fff1f2;
+    color: #b42318;
+    border: 1px solid #fecdd3;
+  }
+
+  .info-box {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+  }
+
+  .success-slip {
+    border: 2px solid #123d70;
+    border-radius: 16px;
+    padding: 30px;
+    background: white;
+  }
+
+  .success-slip h2 {
+    color: #123d70;
+    margin-top: 0;
+  }
+
+  .slip-details {
+    margin-top: 20px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .slip-details div {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .watermark-note {
+    margin-top: 20px;
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  @media (max-width: 800px) {
+    .reg-grid-2,
+    .reg-grid-3 {
+      grid-template-columns: 1fr;
+    }
+
+    .registration-container {
+      width: 96%;
+    }
+
+    .registration-card {
+      padding: 20px 15px;
+    }
+  }
+
+  @media print {
+    .no-print,
+    nav,
+    footer {
+      display: none !important;
+    }
+
+    .registration-page {
+      background: white;
+    }
+
+    .registration-container {
+      width: 100%;
+      margin: 0;
+    }
+
+    .registration-card {
+      box-shadow: none;
+    }
+  }
+`;
+
+function Registration() {
+  const [formData, setFormData] = useState(initialFormData);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [photoPreview, setPhotoPreview] = useState('');
+  const [cameraActive, setCameraActive] = useState(false);
+  const [cameraStream, setCameraStream] = useState(null);
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (!cameraActive || !cameraStream) {
+      return;
+    }
+
+    const videoElement = videoRef.current;
+
+    if (!videoElement) {
+      return;
+    }
+
+    videoElement.srcObject = cameraStream;
+
+    const playCamera = async () => {
+      try {
+        await videoElement.play();
+      } catch {
+        // Browser may require user interaction before playing video.
+      }
     };
 
-    // Handle File Upload from Device
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            stopCamera();
-            setFormData(prev => ({ ...prev, photo: file }));
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setPhotoPreview(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
+    playCamera();
+
+    return () => {
+      videoElement.srcObject = null;
     };
+  }, [cameraActive, cameraStream]);
 
-    // Start Live Camera for Auto-Scanning / Snapshot
-    const startCamera = async () => {
-        setCameraActive(true);
-        try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-            setStream(mediaStream);
-            if (videoRef.current) {
-                videoRef.current.srcObject = mediaStream;
-            }
-        } catch (err) {
-            alert('Unable to access camera. Please check permissions or use file upload.');
-            setCameraActive(false);
-        }
+  useEffect(() => {
+    return () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => {
+          track.stop();
+        });
+      }
+
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
     };
+  }, [cameraStream, photoPreview]);
 
-    // Stop Live Camera
-    const stopCamera = () => {
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            setStream(null);
-        }
-        setCameraActive(false);
-    };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    // Capture Snapshot from Live Video
-    const capturePhoto = () => {
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        if (video && canvas) {
-            const context = canvas.getContext('2d');
-            canvas.width = video.videoWidth || 300;
-            canvas.height = video.videoHeight || 300;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            canvas.toBlob((blob) => {
-                const file = new File([blob], "captured-passport.jpg", { type: "image/jpeg" });
-                setFormData(prev => ({ ...prev, photo: file }));
-            }, 'image/jpeg');
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  };
 
-            const dataUrl = canvas.toDataURL('image/jpeg');
-            setPhotoPreview(dataUrl);
-            stopCamera();
-        }
-    };
+  const stopCamera = () => {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach((track) => {
+        track.stop();
+      });
+    }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setErrorMsg('');
+    setCameraStream(null);
+    setCameraActive(false);
+  };
 
-        try {
-            const dataToSend = new FormData();
-            Object.keys(formData).forEach(key => {
-                if (formData[key] !== null) {
-                    dataToSend.append(key, formData[key]);
-                }
-            });
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0];
 
-            // Your configured Formspree endpoint sending directly to your church email
-            const endpoint = "https://formspree.io/f/xeaorwyz"; 
+    if (!file) {
+      return;
+    }
 
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                body: dataToSend
-            });
+    if (!file.type.startsWith('image/')) {
+      setErrorMsg('Please select a valid image file.');
+      return;
+    }
 
-            if (response.ok || response.type === 'opaque') {
-                // Trigger WhatsApp notification to Reverend (0725436394 -> 254725436394)
-                const reverendPhone = "254725436394";
-                const waMessage = encodeURIComponent(
-                    ` Shalom Reverend, a new member registration has been submitted on the AIC Kibera portal:\n\n` +
-                    `👤 *Name:* ${formData.fullName}\n` +
-                    `📱 *Phone:* ${formData.phone}\n` +
-                    `📍 *Residence:* ${formData.residence}\n` +
-                    `⛪ *Ministry:* ${formData.preferredMinistry}\n` +
-                    `🙏 *Saved:* ${formData.isSaved} | *Baptised:* ${formData.isBaptised}\n` +
-                    `📝 *Full Member:* ${formData.isFullMember}`
-                );
+    setErrorMsg('');
 
-                window.open(`https://wa.me/${reverendPhone}?text=${waMessage}`, '_blank');
-                setSubmitted(true);
-            } else {
-                throw new Error('Failed to submit registration. Please try again.');
-            }
-        } catch (err) {
-            // Fallback success view if offline or testing
-            setSubmitted(true);
-        } finally {
-            setLoading(false);
-        }
-    };
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+    }
 
-    const handlePrintPDF = () => {
-        window.print();
-    };
+    const previewUrl = URL.createObjectURL(file);
 
-    return (
-        <div style={{ background: '#f4f6f8', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Navbar />
+    setFormData((previous) => ({
+      ...previous,
+      photo: file,
+    }));
 
-            {/* Embedded Responsive Grid & Print Styles */}
-            <style>{`
-                .reg-grid-2 {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 20px;
-                }
-                .reg-grid-3 {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 15px;
-                }
-                input:focus, select:focus, textarea:focus {
-                    border-color: #b71c1c !important;
-                    outline: none;
-                    box-shadow: 0 0 0 3px rgba(183, 28, 28, 0.15);
-                }
-                @media print {
-                    body * { visibility: hidden; }
-                    #printable-slip, #printable-slip * { visibility: visible; }
-                    #printable-slip {
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        width: 100%;
-                        background: #fff;
-                        padding: 25px;
-                        color: #000;
-                    }
-                }
-                @media (max-width: 768px) {
-                    .reg-grid-2, .reg-grid-3 {
-                        grid-template-columns: 1fr !important;
-                        gap: 0px !important;
-                    }
-                    .reg-container {
-                        padding: 20px !important;
-                        margin: 20px 10px !important;
-                    }
-                }
-            `}</style>
+    setPhotoPreview(previewUrl);
+  };
 
-            {/* Hero Header */}
-            <div style={{ background: 'linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url("/aickibera-church-image.png")', backgroundSize: 'cover', backgroundPosition: 'center', padding: '4.5rem 1rem', color: '#fff', textAlign: 'center' }}>
-                <div className="container" style={{ maxWidth: '800px' }}>
-                    <h1 style={{ fontSize: 'clamp(26px, 4vw, 38px)', marginBottom: '12px', fontWeight: '800' }}>Comprehensive Membership Registration</h1>
-                    <p style={{ fontSize: '16px', color: '#e0e0e0', lineHeight: '1.5' }}>Join our official church register, scan or upload your photo, and connect with our pastoral leadership at AIC Kibera.</p>
-                </div>
-            </div>
+  const startCamera = async () => {
+    setErrorMsg('');
 
-            {/* Form Container Section */}
-            <section style={{ padding: '40px 15px', flex: 1 }}>
-                <div className="reg-container" style={{ maxWidth: '850px', margin: '0 auto', background: '#fff', padding: '45px', borderRadius: '12px', boxShadow: '0 8px 30px rgba(0,0,0,0.08)' }}>
-                    {submitted ? (
-                        <div id="printable-slip" style={{ padding: '10px' }}>
-                            {/* Official Church Letterhead */}
-                            <div style={{ textAlign: 'center', borderBottom: '2px solid #b71c1c', paddingBottom: '15px', marginBottom: '20px' }}>
-                                <h3 style={{ margin: 0, color: '#b71c1c', fontSize: '20px', fontWeight: '800' }}>AFRICA INLAND CHURCH KIBERA</h3>
-                                <p style={{ margin: '4px 0', fontSize: '13px', color: '#555' }}>Official Church Membership & Records Department</p>
-                                <p style={{ margin: 0, fontSize: '12px', color: '#777' }}>Email: info@aickibera.org | Tel: +254 725 436 394</p>
-                            </div>
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setErrorMsg(
+        'Camera access is not supported by this browser. Please upload a photo instead.'
+      );
+      return;
+    }
 
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
-                                <div>
-                                    <h2 style={{ color: '#1a1a1a', margin: '0 0 5px 0', fontSize: '22px' }}>Membership Registration Record</h2>
-                                    <p style={{ margin: 0, fontSize: '13px', color: '#666' }}>Status: <strong style={{ color: '#25d366' }}>Submitted & Dispatched to Church Email</strong></p>
-                                </div>
-                                <div>
-                                    {photoPreview ? (
-                                        <img src={photoPreview} alt="Member Passport" style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '6px', border: '2px solid #b71c1c' }} />
-                                    ) : (
-                                        <div style={{ width: '90px', height: '90px', borderRadius: '6px', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#666' }}>No Photo</div>
-                                    )}
-                                </div>
-                            </div>
+    try {
+      stopCamera();
 
-                            {/* Detailed Clean Table for Print/PDF */}
-                            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px', fontSize: '13px' }}>
-                               <tbody>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', width: '30%', fontWeight: 'bold' }}>Full Name</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.fullName}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Phone Number</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Email Address</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.email}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Gender / Marital Status</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.gender} | {formData.maritalStatus}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Residence / Estate</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.residence}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Preferred Ministry</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.preferredMinistry}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Spiritual Status</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>Saved: {formData.isSaved} ({formData.whenSaved || 'N/A'}) | Baptised: {formData.isBaptised}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Membership Type</td>
-                                        <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.isFullMember === 'Yes' ? 'Full Member' : 'Visitor / Associate'}</td>
-                                    </tr>
-                                    {formData.prayerRequests && (
-                                        <tr>
-                                            <td style={{ padding: '8px', border: '1px solid #ddd', background: '#f9f9f9', fontWeight: 'bold' }}>Prayer Requests</td>
-                                            <td style={{ padding: '8px', border: '1px solid #ddd' }}>{formData.prayerRequests}</td>
-                                        </tr>
-                                    )}
-                               </tbody>
-                            </table>
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+        },
+        audio: false,
+      });
 
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', fontSize: '13px' }}>
-                                <div>
-                                    <p style={{ borderTop: '1px solid #333', paddingTop: '5px', width: '200px', margin: 0 }}>Member's Signature</p>
-                                </div>
-                                <div>
-                                    <p style={{ borderTop: '1px solid #333', paddingTop: '5px', width: '200px', margin: 0 }}>Pastor's Signature & Stamp</p>
-                                </div>
-                            </div>
+      setCameraStream(stream);
+      setCameraActive(true);
+    } catch {
+      setErrorMsg(
+        'Camera access was denied or unavailable. Please allow camera permission or upload a photo instead.'
+      );
+    }
+  };
 
-                            <div className="no-print" style={{ display: 'flex', gap: '15px', justifyContent: 'center', marginTop: '30px', flexWrap: 'wrap' }}>
-                                <button 
-                                    onClick={handlePrintPDF} 
-                                    style={{ background: '#b71c1c', color: '#fff', border: 'none', padding: '12px 24px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}
-                                >
-                                    <i className="fa-solid fa-file-pdf"></i> Download / Print PDF Record
-                                </button>
-                                <button 
-                                    onClick={() => setSubmitted(false)} 
-                                    style={{ background: '#1a1a1a', color: '#fff', border: 'none', padding: '12px 24px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '15px' }}
-                                >
-                                    Register Another Member
-                                </button>
-                            </div>
-                        </div>
-                    ) : (
-                        <form onSubmit={handleSubmit}>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '25px', borderBottom: '2px solid #b71c1c', paddingBottom: '12px' }}>
-                                <h2 style={{ color: '#1a1a1a', fontSize: '22px', margin: 0 }}>Member Registration Portal</h2>
-                                <span style={{ fontSize: '13px', color: '#666' }}>* Required fields</span>
-                            </div>
+  const capturePhoto = () => {
+    const videoElement = videoRef.current;
+    const canvasElement = canvasRef.current;
 
-                            {errorMsg && (
-                                <div style={{ background: '#ffebee', color: '#c62828', padding: '12px', borderRadius: '6px', marginBottom: '20px', fontSize: '14px' }}>
-                                    {errorMsg}
-                                </div>
-                            )}
+    if (!videoElement || !canvasElement) {
+      setErrorMsg('Camera is not ready yet. Please try again.');
+      return;
+    }
 
-                            {/* Photo / Auto-Scan Section */}
-                            <div style={{ background: '#fdf2f2', padding: '20px', borderRadius: '8px', marginBottom: '25px', border: '1px dashed #b71c1c' }}>
-                                <label style={{ display: 'block', fontWeight: '700', marginBottom: '12px', fontSize: '15px', color: '#b71c1c' }}>
-                                    <i className="fa-solid fa-camera"></i> Member Passport Photo / ID Auto-Scan *
-                                </label>
+    if (!videoElement.videoWidth || !videoElement.videoHeight) {
+      setErrorMsg(
+        'The camera is still loading. Please wait a moment and try again.'
+      );
+      return;
+    }
 
-                                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
-                                    <div>
-                                        {photoPreview ? (
-                                            <img src={photoPreview} alt="Preview" style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '50%', border: '3px solid #b71c1c' }} />
-                                        ) : (
-                                            <div style={{ width: '90px', height: '90px', borderRadius: '50%', background: '#ddd', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-                                                <i className="fa-solid fa-user" style={{ fontSize: '36px' }}></i>
-                                            </div>
-                                        )}
-                                    </div>
+    canvasElement.width = videoElement.videoWidth;
+    canvasElement.height = videoElement.videoHeight;
 
-                                    <div style={{ flex: 1 }}>
-                                        {cameraActive ? (
-                                            <div style={{ marginBottom: '12px' }}>
-                                                <video ref={videoRef} autoPlay playsInline style={{ width: '100%', maxWidth: '280px', borderRadius: '6px', border: '2px solid #333' }}></video>
-                                                <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-                                                <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
-                                                    <button type="button" onClick={capturePhoto} style={{ background: '#25d366', color: '#fff', border: 'none', padding: '8px 14px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>Capture Photo</button>
-                                                    <button type="button" onClick={stopCamera} style={{ background: '#666', color: '#fff', border: 'none', padding: '8px 14px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}>Cancel</button>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                                <div>
-                                                    <label style={{ fontSize: '13px', fontWeight: '600', color: '#444', display: 'block', marginBottom: '4px' }}>Upload from Device Files:</label>
-                                                    <input type="file" accept="image/*" onChange={handleFileChange} style={{ fontSize: '13px' }} />
-                                                </div>
-                                                <div>
-                                                    <span style={{ fontSize: '12px', color: '#666', display: 'inline-block', margin: '4px 0' }}>— OR —</span>
-                                                    <div>
-                                                        <button type="button" onClick={startCamera} style={{ background: '#1a1a1a', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer', fontSize: '13px' }}>
-                                                            <i className="fa-solid fa-camera-retro"></i> Open Camera to Auto-Scan
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
+    const context = canvasElement.getContext('2d');
 
-                            {/* Personal Info */}
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Full Name *</label>
-                                    <input type="text" name="fullName" required value={formData.fullName} onChange={handleChange} placeholder="Enter your full name" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Phone Number (WhatsApp) *</label>
-                                    <input type="tel" name="phone" required value={formData.phone} onChange={handleChange} placeholder="e.g. +254 712 345 678" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
+    if (!context) {
+      setErrorMsg('Unable to capture the photo.');
+      return;
+    }
 
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Email Address *</label>
-                                    <input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="name@example.com" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Gender *</label>
-                                    <select name="gender" value={formData.gender} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-3">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Date of Birth</label>
-                                    <input type="date" name="dob" value={formData.dob} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Marital Status</label>
-                                    <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Single">Single</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Widowed">Widowed</option>
-                                        <option value="Youth / Teen">Youth / Teen</option>
-                                    </select>
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Occupation</label>
-                                    <input type="text" name="occupation" value={formData.occupation} onChange={handleChange} placeholder="e.g. Teacher, Business" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Place of Residence / Estate *</label>
-                                    <input type="text" name="residence" required value={formData.residence} onChange={handleChange} placeholder="e.g. Kibera Drive, Nairobi" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Preferred Ministry / Fellowship</label>
-                                    <select name="preferredMinistry" value={formData.preferredMinistry} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option>Music Ministry (Choir)</option>
-                                        <option>Youth Fellowship</option>
-                                        <option>Women Ministry (WOFAK)</option>
-                                        <option>Men Fellowship (PKF)</option>
-                                        <option>Children Church</option>
-                                        <option>Media & Tech</option>
-                                        <option>General Member</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            {/* Spiritual Background */}
-                            <h3 style={{ fontSize: '18px', color: '#b71c1c', margin: '25px 0 15px 0', borderBottom: '1px solid #eee', paddingBottom: '8px' }}>Spiritual Background</h3>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Are you saved (Born Again)? *</label>
-                                    <select name="isSaved" value={formData.isSaved} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>When were you saved?</label>
-                                    <input type="text" name="whenSaved" value={formData.whenSaved} onChange={handleChange} placeholder="e.g. Year 2020 / Month & Year" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Are you baptised? *</label>
-                                    <select name="isBaptised" value={formData.isBaptised} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>At which church were you baptised?</label>
-                                    <input type="text" name="baptismChurch" value={formData.baptismChurch} onChange={handleChange} placeholder="e.g. AIC Ngong" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>By which pastor?</label>
-                                    <input type="text" name="baptismPastor" value={formData.baptismPastor} onChange={handleChange} placeholder="e.g. Pastor John" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>On which date / year?</label>
-                                    <input type="text" name="baptismDate" value={formData.baptismDate} onChange={handleChange} placeholder="e.g. 15th Dec 2021" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Former Church (If transferring)</label>
-                                    <input type="text" name="formerChurch" value={formData.formerChurch} onChange={handleChange} placeholder="Previous church name" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Former Pastor's Name</label>
-                                    <input type="text" name="formerPastor" value={formData.formerPastor} onChange={handleChange} placeholder="Previous pastor's name" style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }} />
-                                </div>
-                            </div>
-
-                            <div className="reg-grid-2">
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>First time visiting AIC Kibera? *</label>
-                                    <select name="isFirstTime" value={formData.isFirstTime} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                <div style={{ marginBottom: '20px' }}>
-                                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Are you registering as a Full Member? *</label>
-                                    <select name="isFullMember" value={formData.isFullMember} onChange={handleChange} style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', background: '#fff', boxSizing: 'border-box' }}>
-                                        <option value="Yes">Yes (Full Member)</option>
-                                        <option value="No">No (Associate / Visitor)</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div style={{ marginBottom: '30px' }}>
-                                <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', fontSize: '14px', color: '#333' }}>Prayer Requests / Additional Notes</label>
-                                <textarea name="prayerRequests" rows="3" value={formData.prayerRequests} onChange={handleChange} placeholder="Share any prayer items or special notes for the pastoral team..." style={{ width: '100%', padding: '12px 14px', border: '1px solid #ccc', borderRadius: '6px', fontSize: '14px', boxSizing: 'border-box' }}></textarea>
-                            </div>
-
-                            <button 
-                                type="submit" 
-                                disabled={loading}
-                                style={{ width: '100%', background: loading ? '#888' : '#b71c1c', color: '#fff', padding: '15px', border: 'none', borderRadius: '6px', fontSize: '16px', fontWeight: '700', cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s' }}
-                            >
-                                {loading ? 'Submitting Registration & Photo...' : 'Submit Registration & Send to Church Email'}
-                            </button>
-                        </form>
-                    )}
-                </div>
-            </section>
-
-            <Footer />
-            <WhatsAppFloat />
-        </div>
+    context.drawImage(
+      videoElement,
+      0,
+      0,
+      canvasElement.width,
+      canvasElement.height
     );
+
+    canvasElement.toBlob(
+      (blob) => {
+        if (!blob) {
+          setErrorMsg('Unable to create the photo.');
+          return;
+        }
+
+        const file = new File(
+          [blob],
+          `aic-kibera-registration-${Date.now()}.jpg`,
+          {
+            type: 'image/jpeg',
+          }
+        );
+
+        if (photoPreview) {
+          URL.revokeObjectURL(photoPreview);
+        }
+
+        const previewUrl = URL.createObjectURL(file);
+
+        setFormData((previous) => ({
+          ...previous,
+          photo: file,
+        }));
+
+        setPhotoPreview(previewUrl);
+
+        stopCamera();
+      },
+      'image/jpeg',
+      0.9
+    );
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setLoading(true);
+    setErrorMsg('');
+
+    try {
+      const submissionData = new FormData();
+
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value !== null && value !== undefined && value !== '') {
+          submissionData.append(key, value);
+        }
+      });
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: submissionData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        if (result?.errors?.length) {
+          const messages = result.errors
+            .map((item) => item.message)
+            .filter(Boolean)
+            .join(', ');
+
+          throw new Error(
+            messages || 'Registration could not be submitted.'
+          );
+        }
+
+        throw new Error(
+          'Registration could not be submitted. Please try again.'
+        );
+      }
+
+      const whatsappMessage = [
+        'A.I.C. Kibera Registration',
+        '',
+        `Name: ${formData.fullName}`,
+        `Phone: ${formData.phone}`,
+        `Email: ${formData.email || 'Not provided'}`,
+        `Preferred Ministry: ${
+          formData.preferredMinistry || 'Not specified'
+        }`,
+        '',
+        'A new church registration has been submitted online.',
+      ].join('\n');
+
+      const whatsappUrl =
+        `https://wa.me/${REVEREND_PHONE}?text=${encodeURIComponent(
+          whatsappMessage
+        )}`;
+
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+      setSubmitted(true);
+    } catch (error) {
+      setErrorMsg(
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred. Please try again.'
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePrintPDF = () => {
+    window.print();
+  };
+
+  const resetRegistration = () => {
+    stopCamera();
+
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+    }
+
+    setFormData(initialFormData);
+    setSubmitted(false);
+    setLoading(false);
+    setErrorMsg('');
+    setPhotoPreview('');
+  };
+
+  return (
+    <div className="registration-page">
+      <style>{responsiveStyles}</style>
+
+      <Navbar />
+
+      <section className="registration-hero">
+        <h1>A.I.C. Kibera Registration</h1>
+
+        <p>
+          Welcome to African Inland Church Kibera. Complete the registration
+          form below to connect with our church family and ministry teams.
+        </p>
+      </section>
+
+      <main className="registration-container">
+        <div className="registration-card">
+          {!submitted ? (
+            <form onSubmit={handleSubmit}>
+              <div className="info-box">
+                Please provide accurate information. Your registration will
+                be received by the A.I.C. Kibera church administration.
+              </div>
+
+              {errorMsg && (
+                <div className="error-box" role="alert">
+                  {errorMsg}
+                </div>
+              )}
+
+              <h2 className="section-title">Personal Information</h2>
+
+              <div className="reg-grid-2">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="fullName">
+                    Full Name <span className="required">*</span>
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="phone">
+                    Phone Number <span className="required">*</span>
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="07XXXXXXXX"
+                    required
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="email">
+                    Email Address
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="dob">
+                    Date of Birth
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="dob"
+                    name="dob"
+                    type="date"
+                    value={formData.dob}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="reg-grid-3">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="gender">
+                    Gender
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="gender"
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="maritalStatus">
+                    Marital Status
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="maritalStatus"
+                    name="maritalStatus"
+                    value={formData.maritalStatus}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Divorced">Divorced</option>
+                  </select>
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="occupation">
+                    Occupation
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="occupation"
+                    name="occupation"
+                    type="text"
+                    value={formData.occupation}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div className="reg-field">
+                <label className="reg-label" htmlFor="residence">
+                  Current Residence
+                </label>
+
+                <input
+                  className="reg-input"
+                  id="residence"
+                  name="residence"
+                  type="text"
+                  value={formData.residence}
+                  onChange={handleChange}
+                  placeholder="Area / Estate / Location"
+                />
+              </div>
+
+              <h2 className="section-title">Church Information</h2>
+
+              <div className="reg-grid-2">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="isSaved">
+                    Have you accepted Jesus Christ as your personal Saviour?
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="isSaved"
+                    name="isSaved"
+                    value={formData.isSaved}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                    <option value="Not sure">Not sure</option>
+                  </select>
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="whenSaved">
+                    When did you accept Christ?
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="whenSaved"
+                    name="whenSaved"
+                    type="text"
+                    value={formData.whenSaved}
+                    onChange={handleChange}
+                    placeholder="Year or approximate period"
+                  />
+                </div>
+              </div>
+
+              <div className="reg-grid-2">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="isBaptised">
+                    Have you been baptized?
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="isBaptised"
+                    name="isBaptised"
+                    value={formData.isBaptised}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="baptismDate">
+                    Baptism Date
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="baptismDate"
+                    name="baptismDate"
+                    type="date"
+                    value={formData.baptismDate}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="baptismChurch">
+                    Baptism Church
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="baptismChurch"
+                    name="baptismChurch"
+                    type="text"
+                    value={formData.baptismChurch}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="baptismPastor">
+                    Baptized By / Pastor
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="baptismPastor"
+                    name="baptismPastor"
+                    type="text"
+                    value={formData.baptismPastor}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <h2 className="section-title">Previous Church</h2>
+
+              <div className="reg-grid-2">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="formerChurch">
+                    Previous Church
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="formerChurch"
+                    name="formerChurch"
+                    type="text"
+                    value={formData.formerChurch}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="formerPastor">
+                    Previous Pastor
+                  </label>
+
+                  <input
+                    className="reg-input"
+                    id="formerPastor"
+                    name="formerPastor"
+                    type="text"
+                    value={formData.formerPastor}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <h2 className="section-title">Membership Information</h2>
+
+              <div className="reg-grid-2">
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="isFirstTime">
+                    Is this your first visit to A.I.C. Kibera?
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="isFirstTime"
+                    name="isFirstTime"
+                    value={formData.isFirstTime}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div className="reg-field">
+                  <label className="reg-label" htmlFor="isFullMember">
+                    Are you already a full church member?
+                  </label>
+
+                  <select
+                    className="reg-select"
+                    id="isFullMember"
+                    name="isFullMember"
+                    value={formData.isFullMember}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="reg-field">
+                <label className="reg-label" htmlFor="preferredMinistry">
+                  Preferred Ministry
+                </label>
+
+                <select
+                  className="reg-select"
+                  id="preferredMinistry"
+                  name="preferredMinistry"
+                  value={formData.preferredMinistry}
+                  onChange={handleChange}
+                >
+                  <option value="">Select a ministry</option>
+                  <option value="Youth Ministry">Youth Ministry</option>
+                  <option value="Music Ministry">Music Ministry</option>
+                  <option value="Praise and Worship">
+                    Praise and Worship
+                  </option>
+                  <option value="Kiswahili Choir">Kiswahili Choir</option>
+                  <option value="Christ Ambassadors Choir">
+                    Christ Ambassadors Choir
+                  </option>
+                  <option value="Media Ministry">Media Ministry</option>
+                  <option value="Projection Ministry">
+                    Projection Ministry
+                  </option>
+                  <option value="Cadets">Cadets</option>
+                  <option value="Battalion">Battalion</option>
+                  <option value="Children Ministry">
+                    Children Ministry
+                  </option>
+                  <option value="Men Ministry">Men Ministry</option>
+                  <option value="Women Ministry">Women Ministry</option>
+                  <option value="Evangelism">Evangelism</option>
+                  <option value="Prayer Ministry">Prayer Ministry</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <h2 className="section-title">Prayer Request</h2>
+
+              <div className="reg-field">
+                <label className="reg-label" htmlFor="prayerRequests">
+                  Prayer Requests / Additional Information
+                </label>
+
+                <textarea
+                  className="reg-textarea"
+                  id="prayerRequests"
+                  name="prayerRequests"
+                  value={formData.prayerRequests}
+                  onChange={handleChange}
+                  placeholder="Share any prayer request or information you would like the church administration to know."
+                />
+              </div>
+
+              <h2 className="section-title">Profile Photo</h2>
+
+              <div className="photo-section">
+                <p>
+                  You may upload a profile photo or use your device camera.
+                </p>
+
+                <div className="button-row no-print">
+                  <label
+                    className="registration-button secondary-button"
+                    htmlFor="photo"
+                  >
+                    Choose Photo
+                  </label>
+
+                  <input
+                    id="photo"
+                    name="photo"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                  />
+
+                  {!cameraActive ? (
+                    <button
+                      type="button"
+                      className="registration-button secondary-button"
+                      onClick={startCamera}
+                    >
+                      Open Camera
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="registration-button primary-button"
+                        onClick={capturePhoto}
+                      >
+                        Capture Photo
+                      </button>
+
+                      <button
+                        type="button"
+                        className="registration-button danger-button"
+                        onClick={stopCamera}
+                      >
+                        Close Camera
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {cameraActive && (
+                  <div className="camera-area">
+                    <video
+                      ref={videoRef}
+                      className="camera-video"
+                      autoPlay
+                      muted
+                      playsInline
+                    />
+                  </div>
+                )}
+
+                {photoPreview && (
+                  <div>
+                    <p>
+                      <strong>Selected Photo:</strong>
+                    </p>
+
+                    <img
+                      src={photoPreview}
+                      alt="Registration preview"
+                      className="photo-preview"
+                    />
+                  </div>
+                )}
+
+                <canvas
+                  ref={canvasRef}
+                  style={{ display: 'none' }}
+                />
+              </div>
+
+              <div className="info-box">
+                By submitting this form, you are requesting registration with
+                A.I.C. Kibera. The church administration may contact you using
+                the phone number or email provided.
+              </div>
+
+              <div className="button-row no-print">
+                <button
+                  type="submit"
+                  className="registration-button primary-button"
+                  disabled={loading}
+                >
+                  {loading
+                    ? 'Submitting Registration...'
+                    : 'Submit Registration'}
+                </button>
+
+                <button
+                  type="button"
+                  className="registration-button secondary-button"
+                  onClick={resetRegistration}
+                  disabled={loading}
+                >
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div className="success-slip">
+              <div className="success-box">
+                <strong>Registration Submitted Successfully.</strong>
+                <br />
+                Your registration has been sent to the A.I.C. Kibera church
+                administration.
+              </div>
+
+              <h2>Thank You for Registering</h2>
+
+              <p>
+                Welcome to A.I.C. Kibera. A member of the church administration
+                may contact you using the details you provided.
+              </p>
+
+              <div className="slip-details">
+                <div>
+                  <strong>Name:</strong> {formData.fullName}
+                </div>
+
+                <div>
+                  <strong>Phone:</strong> {formData.phone}
+                </div>
+
+                {formData.email && (
+                  <div>
+                    <strong>Email:</strong> {formData.email}
+                  </div>
+                )}
+
+                {formData.preferredMinistry && (
+                  <div>
+                    <strong>Preferred Ministry:</strong>{' '}
+                    {formData.preferredMinistry}
+                  </div>
+                )}
+
+                <div>
+                  <strong>Church:</strong> A.I.C. Kibera
+                </div>
+
+                <div>
+                  <strong>Church Phone:</strong> 0725436394
+                </div>
+
+                <div>
+                  <strong>Church Email:</strong> info@aickibera.org
+                </div>
+              </div>
+
+              <div className="button-row no-print">
+                <button
+                  type="button"
+                  className="registration-button primary-button"
+                  onClick={handlePrintPDF}
+                >
+                  Print / Save as PDF
+                </button>
+
+                <button
+                  type="button"
+                  className="registration-button secondary-button"
+                  onClick={resetRegistration}
+                >
+                  Register Another Person
+                </button>
+              </div>
+
+              <p className="watermark-note">
+                A.I.C. Kibera — Church Administration
+              </p>
+            </div>
+          )}
+        </div>
+      </main>
+
+      <Footer />
+      <WhatsAppFloat />
+    </div>
+  );
 }
+
+export default Registration;

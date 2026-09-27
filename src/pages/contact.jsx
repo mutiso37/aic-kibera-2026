@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Navbar from '../components/Navbar';
+import Navbar from './components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 
@@ -39,12 +39,12 @@ export default function Contact() {
             } else {
                 throw new Error('Failed to send message. Please try again.');
             }
-        } catch (err) {
-            // Fallback success state for offline testing
-            setSubmitted(true);
-        } finally {
-            setLoading(false);
-        }
+       } catch {
+        // Fallback success state for offline testing
+        setSubmitted(true);
+    } finally {
+        setLoading(false);
+    }
     };
 
     return (
