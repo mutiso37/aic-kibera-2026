@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from '../components/Footer';
-import WhatsAppFloat from '../components/WhatsAppFloat';
-
+import Navbar from '../components/Navbar.jsx';
+import Footer from '../components/Footer.jsx';
+import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
 export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
