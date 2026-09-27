@@ -304,7 +304,7 @@ const responsiveStyles = `
   }
 `;
 
-function Registration() {
+export default function Registration() {
   const [formData, setFormData] = useState(initialFormData);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -378,6 +378,47 @@ function Registration() {
     setCameraActive(false);
   };
 
+  // Image quality validator (rejects dull, dark, or poor quality pictures)
+  const validateAndProcessImage = (file, callback) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+        let totalBrightness = 0;
+        let pixelCount = data.length / 4;
+
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const brightness = r * 0.299 + g * 0.587 + b * 0.114;
+          totalBrightness += brightness;
+        }
+
+        const avgBrightness = totalBrightness / pixelCount;
+
+        // Reject dull or dark pictures (threshold < 48)
+        if (avgBrightness < 48) {
+          setErrorMsg('Photo is too dull, dark, or unclear. Please provide a clear, well-lit natural photo.');
+          return;
+        }
+
+        setErrorMsg('');
+        callback(file, e.target.result);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleFileChange = (event) => {
     const file = event.target.files?.[0];
 
@@ -390,20 +431,18 @@ function Registration() {
       return;
     }
 
-    setErrorMsg('');
+    validateAndProcessImage(file, (validFile, previewUrl) => {
+      if (photoPreview) {
+        URL.revokeObjectURL(photoPreview);
+      }
 
-    if (photoPreview) {
-      URL.revokeObjectURL(photoPreview);
-    }
+      setFormData((previous) => ({
+        ...previous,
+        photo: validFile,
+      }));
 
-    const previewUrl = URL.createObjectURL(file);
-
-    setFormData((previous) => ({
-      ...previous,
-      photo: file,
-    }));
-
-    setPhotoPreview(previewUrl);
+      setPhotoPreview(previewUrl);
+    });
   };
 
   const startCamera = async () => {
@@ -484,20 +523,19 @@ function Registration() {
           }
         );
 
-        if (photoPreview) {
-          URL.revokeObjectURL(photoPreview);
-        }
+        validateAndProcessImage(file, (validFile, previewUrl) => {
+          if (photoPreview) {
+            URL.revokeObjectURL(photoPreview);
+          }
 
-        const previewUrl = URL.createObjectURL(file);
+          setFormData((previous) => ({
+            ...previous,
+            photo: validFile,
+          }));
 
-        setFormData((previous) => ({
-          ...previous,
-          photo: file,
-        }));
-
-        setPhotoPreview(previewUrl);
-
-        stopCamera();
+          setPhotoPreview(previewUrl);
+          stopCamera();
+        });
       },
       'image/jpeg',
       0.9
@@ -506,6 +544,11 @@ function Registration() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!formData.photo) {
+      setErrorMsg('Please upload or capture a clear verification photo first.');
+      return;
+    }
 
     setLoading(true);
     setErrorMsg('');
@@ -626,6 +669,97 @@ function Registration() {
                 </div>
               )}
 
+              {/* =========================================
+                  PROFILE PHOTO SECTION (MOVED TO TOP)
+              ========================================= */}
+              <h2 className="section-title">Profile Photo Verification</h2>
+
+              <div className="photo-section">
+                <p>
+                  Please capture or upload a clear verification photo first. Dull, dark, or unclear pictures will be automatically rejected.
+                </p>
+
+                <div className="button-row no-print">
+                  <label
+                    className="registration-button secondary-button"
+                    htmlFor="photo"
+                  >
+                    Choose Photo
+                  </label>
+
+                  <input
+                    id="photo"
+                    name="photo"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{ display: 'none' }}
+                  />
+
+                  {!cameraActive ? (
+                    <button
+                      type="button"
+                      className="registration-button secondary-button"
+                      onClick={startCamera}
+                    >
+                      Open Camera
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="registration-button primary-button"
+                        onClick={capturePhoto}
+                      >
+                        Capture Photo
+                      </button>
+
+                      <button
+                        type="button"
+                        className="registration-button danger-button"
+                        onClick={stopCamera}
+                      >
+                        Close Camera
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {cameraActive && (
+                  <div className="camera-area">
+                    <video
+                      ref={videoRef}
+                      className="camera-video"
+                      autoPlay
+                      muted
+                      playsInline
+                    />
+                  </div>
+                )}
+
+                {photoPreview && (
+                  <div>
+                    <p>
+                      <strong>Selected Photo:</strong>
+                    </p>
+
+                    <img
+                      src={photoPreview}
+                      alt="Registration preview"
+                      className="photo-preview"
+                    />
+                  </div>
+                )}
+
+                <canvas
+                  ref={canvasRef}
+                  style={{ display: 'none' }}
+                />
+              </div>
+
+              {/* =========================================
+                  PERSONAL INFORMATION
+              ========================================= */}
               <h2 className="section-title">Personal Information</h2>
 
               <div className="reg-grid-2">
@@ -998,91 +1132,6 @@ function Registration() {
                 />
               </div>
 
-              <h2 className="section-title">Profile Photo</h2>
-
-              <div className="photo-section">
-                <p>
-                  You may upload a profile photo or use your device camera.
-                </p>
-
-                <div className="button-row no-print">
-                  <label
-                    className="registration-button secondary-button"
-                    htmlFor="photo"
-                  >
-                    Choose Photo
-                  </label>
-
-                  <input
-                    id="photo"
-                    name="photo"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    style={{ display: 'none' }}
-                  />
-
-                  {!cameraActive ? (
-                    <button
-                      type="button"
-                      className="registration-button secondary-button"
-                      onClick={startCamera}
-                    >
-                      Open Camera
-                    </button>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        className="registration-button primary-button"
-                        onClick={capturePhoto}
-                      >
-                        Capture Photo
-                      </button>
-
-                      <button
-                        type="button"
-                        className="registration-button danger-button"
-                        onClick={stopCamera}
-                      >
-                        Close Camera
-                      </button>
-                    </>
-                  )}
-                </div>
-
-                {cameraActive && (
-                  <div className="camera-area">
-                    <video
-                      ref={videoRef}
-                      className="camera-video"
-                      autoPlay
-                      muted
-                      playsInline
-                    />
-                  </div>
-                )}
-
-                {photoPreview && (
-                  <div>
-                    <p>
-                      <strong>Selected Photo:</strong>
-                    </p>
-
-                    <img
-                      src={photoPreview}
-                      alt="Registration preview"
-                      className="photo-preview"
-                    />
-                  </div>
-                )}
-
-                <canvas
-                  ref={canvasRef}
-                  style={{ display: 'none' }}
-                />
-              </div>
-
               <div className="info-box">
                 By submitting this form, you are requesting registration with
                 A.I.C. Kibera. The church administration may contact you using
@@ -1192,5 +1241,3 @@ function Registration() {
     </div>
   );
 }
-
-export default Registration;

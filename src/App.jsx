@@ -4,29 +4,29 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 // =========================
 // MAIN PAGES
 // =========================
-import Home from './pages/home';
-import About from './pages/about';
-import Leadership from './pages/leadership';
+import Home from './pages/Home';
+import About from './pages/About';
+import Leadership from './pages/Leadership';
 
-import Ministries from './pages/ministries';
+import Ministries from './pages/Ministries';
 import MusicMinistry from './pages/MusicMinistry';
 import MinistryDetail from './pages/MinistryDetail';
 
-import Departments from './pages/departments';
+import Departments from './pages/Departments';
 import Events from './pages/Events';
 import Announcements from './pages/Announcements';
 import WatchLive from './pages/WatchLive';
 import Registration from './pages/Registration';
-import Give from './pages/give';
-import Contact from './pages/contact';
+import Give from './pages/Give';
+import Contact from './pages/Contact';
 import Gallery from './pages/Gallery';
 
 // =========================
 // SERVICES
 // =========================
 import FirstTime from './pages/FirstTime';
-import Welcome from './pages/welcome';
-import Programme from './pages/programme';
+import Welcome from './pages/Welcome';
+import Programme from './pages/Programme';
 
 // ScrollToTop helper component to reset scroll position on route change
 function ScrollToTop() {
@@ -182,14 +182,13 @@ export default function App() {
                 />
 
 
-                {/* =========================
+              {/* =========================
                     MEMBERSHIP
                 ========================= */}
                 <Route
-                    path="/register"
+                    path="/registration"
                     element={<Registration />}
                 />
-
 
                 {/* =========================
                     GIVING

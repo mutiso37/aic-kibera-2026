@@ -9084,3 +9084,15 @@ css
 
 }
 
+.gallery-navigation {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* Ensures it stays above images and other content */
+  background-color: rgba(255, 255, 255, 0.95);
+  /* Solid background or semi-transparent */
+  backdrop-filter: blur(8px);
+  /* Optional: modern frosted-glass effect */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Optional: subtle shadow for depth */
+}

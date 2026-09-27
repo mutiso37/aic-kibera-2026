@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import Navbar from '../components/Navbar';
 export default function Gallery() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isBlurred, setIsBlurred] = useState(false);
@@ -53,157 +53,183 @@ export default function Gallery() {
             style={{
                 filter: isBlurred ? 'blur(25px)' : 'none',
                 transition: 'filter 0.1s ease-in-out',
-                userSelect: 'none'
+                userSelect: 'none',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                background: '#fafafa'
             }}
         >
-            {/* Embedded Media Queries for PC (Large) vs Mobile (Compact) Adaptation */}
-            <style>{`
-                @media (max-width: 768px) {
-                    .lightbox-modal-box {
-                        width: 95% !important;
-                        max-width: 95% !important;
-                        padding: 15px !important;
-                    }
-                    .lightbox-media-container {
-                        height: 280px !important;
-                    }
-                    .lightbox-diagonal-text {
-                        font-size: 1.2rem !important;
-                    }
-                }
-            `}</style>
+            {/* Sticky Navigation Section */}
+            <Navbar />
 
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="container">
-                    <h1>Church Gallery</h1>
-                    <p>A glimpse into our worship services, fellowships, and community events at AIC Kibera.</p>
-                    {isBlurred && (
-                        <p style={{ color: '#d9534f', fontWeight: 'bold', marginTop: '10px' }}>
-                            [ Security Notice: Content hidden/blurred for media protection ]
-                        </p>
-                    )}
+            {/* Main Content Wrapper (flex: 1 pushes footer to the bottom) */}
+            <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+                {/* Embedded Media Queries for PC (Large) vs Mobile (Compact) Adaptation */}
+                <style>{`
+                    @media (max-width: 768px) {
+                        .lightbox-modal-box {
+                            width: 95% !important;
+                            max-width: 95% !important;
+                            padding: 15px !important;
+                        }
+                        .lightbox-media-container {
+                            height: 280px !important;
+                        }
+                        .lightbox-diagonal-text {
+                            font-size: 1.2rem !important;
+                        }
+                    }
+                `}</style>
+
+                {/* Page Header */}
+                <div className="page-header" style={{ padding: '40px 0 20px 0' }}>
+                    <div className="container">
+                        <h1>Church Gallery</h1>
+                        <p>A glimpse into our worship services, fellowships, and community events at AIC Kibera.</p>
+                        {isBlurred && (
+                            <p style={{ color: '#d9534f', fontWeight: 'bold', marginTop: '10px' }}>
+                                [ Security Notice: Content hidden/blurred for media protection ]
+                            </p>
+                        )}
+                    </div>
                 </div>
+
+                {/* Gallery Grid Section */}
+                <section className="container section-padding" style={{ flex: '1', paddingBottom: '60px' }}>
+                    <div 
+                        className="gallery-grid" 
+                        style={{ 
+                            display: 'grid', 
+                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+                            gap: '20px', 
+                            marginTop: '10px' 
+                        }}
+                    >
+                        {galleryImages.map((image) => (
+                            <div 
+                                key={image.id} 
+                                className="gallery-item"
+                                style={{ 
+                                    borderRadius: '8px', 
+                                    overflow: 'hidden', 
+                                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)', 
+                                    background: '#f9f9f9', 
+                                    cursor: 'pointer',
+                                    position: 'relative',
+                                    userSelect: 'none'
+                                }}
+                                onClick={() => setSelectedImage(image)}
+                            >
+                                {/* Image Container with Protection and Full-Container Watermark */}
+                                <div 
+                                    style={{ 
+                                        height: '220px', 
+                                        background: '#e0e0e0', 
+                                        display: 'flex', 
+                                        alignItems: 'center', 
+                                        justifyContent: 'center', 
+                                        position: 'relative', 
+                                        overflow: 'hidden' 
+                                    }}
+                                >
+                                    <div 
+                                        style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#dcdcdc' }}
+                                        onContextMenu={handleContextMenu}
+                                        onDragStart={handleDragStart}
+                                        aria-hidden="true"
+                                    >
+                                        {image.src ? (
+                                            <img 
+                                                src={image.src} 
+                                                alt={image.title} 
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                onContextMenu={handleContextMenu}
+                                                onDragStart={handleDragStart}
+                                            />
+                                        ) : (
+                                            <i className="fa-regular fa-image" style={{ fontSize: '3rem', color: '#888' }}></i>
+                                        )}
+                                    </div>
+
+                                    {/* FULL-CONTAINER LOGO WATERMARK */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        pointerEvents: 'none',
+                                        userSelect: 'none',
+                                        opacity: 0.18,
+                                        zIndex: 2,
+                                        padding: '20px'
+                                    }}>
+                                        <img 
+                                            src="/aic-kibera-logo.png" 
+                                            alt="Full Watermark" 
+                                            style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} 
+                                            onError={(e) => { e.target.style.display = 'none'; }}
+                                        />
+                                    </div>
+
+                                    {/* Permanent Corner Watermark Badge */}
+                                    <div style={{
+                                        position: 'absolute',
+                                        bottom: '10px',
+                                        right: '10px',
+                                        background: 'rgba(0, 0, 0, 0.65)',
+                                        color: '#ffffff',
+                                        padding: '4px 8px',
+                                        borderRadius: '4px',
+                                        fontSize: '0.75rem',
+                                        fontWeight: 'bold',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '5px',
+                                        pointerEvents: 'none',
+                                        userSelect: 'none',
+                                        backdropFilter: 'blur(2px)',
+                                        zIndex: 3
+                                    }}>
+                                        <img 
+                                            src="/aic-kibera-logo.png" 
+                                            alt="AIC Kibera Logo" 
+                                            style={{ width: '14px', height: '14px', objectFit: 'contain' }} 
+                                            onError={(e) => { e.target.style.display = 'none'; }}
+                                        />
+                                        AIC KIBERA
+                                    </div>
+                                </div>
+
+                                <div style={{ padding: '15px' }}>
+                                    <span style={{ fontSize: '0.8rem', color: '#d9534f', fontWeight: 'bold', textTransform: 'uppercase' }}>{image.category}</span>
+                                    <h3 style={{ fontSize: '1.1rem', margin: '5px 0 0 0', color: '#333' }}>{image.title}</h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
             </div>
 
-            {/* Gallery Grid Section */}
-            <section className="container section-padding">
-                <div 
-                    className="gallery-grid" 
-                    style={{ 
-                        display: 'grid', 
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-                        gap: '20px', 
-                        marginTop: '30px' 
-                    }}
-                >
-                    {galleryImages.map((image) => (
-                        <div 
-                            key={image.id} 
-                            className="gallery-item"
-                            style={{ 
-                                borderRadius: '8px', 
-                                overflow: 'hidden', 
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)', 
-                                background: '#f9f9f9', 
-                                cursor: 'pointer',
-                                position: 'relative',
-                                userSelect: 'none'
-                            }}
-                            onClick={() => setSelectedImage(image)}
-                        >
-                            {/* Image Container with Protection and Full-Container Watermark */}
-                            <div 
-                                style={{ 
-                                    height: '220px', 
-                                    background: '#e0e0e0', 
-                                    display: 'flex', 
-                                    alignItems: 'center', 
-                                    justifyContent: 'center', 
-                                    position: 'relative', 
-                                    overflow: 'hidden' 
-                                }}
-                            >
-                                <div 
-                                    style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#dcdcdc' }}
-                                    onContextMenu={handleContextMenu}
-                                    onDragStart={handleDragStart}
-                                    aria-hidden="true"
-                                >
-                                    {image.src ? (
-                                        <img 
-                                            src={image.src} 
-                                            alt={image.title} 
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                            onContextMenu={handleContextMenu}
-                                            onDragStart={handleDragStart}
-                                        />
-                                    ) : (
-                                        <i className="fa-regular fa-image" style={{ fontSize: '3rem', color: '#888' }}></i>
-                                    )}
-                                </div>
-
-                                {/* FULL-CONTAINER LOGO WATERMARK */}
-                                <div style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    pointerEvents: 'none',
-                                    userSelect: 'none',
-                                    opacity: 0.18,
-                                    zIndex: 2,
-                                    padding: '20px'
-                                }}>
-                                    <img 
-                                        src="/aic-kibera-logo.png" 
-                                        alt="Full Watermark" 
-                                        style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} 
-                                        onError={(e) => { e.target.style.display = 'none'; }}
-                                    />
-                                </div>
-
-                                {/* Permanent Corner Watermark Badge */}
-                                <div style={{
-                                    position: 'absolute',
-                                    bottom: '10px',
-                                    right: '10px',
-                                    background: 'rgba(0, 0, 0, 0.65)',
-                                    color: '#ffffff',
-                                    padding: '4px 8px',
-                                    borderRadius: '4px',
-                                    fontSize: '0.75rem',
-                                    fontWeight: 'bold',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '5px',
-                                    pointerEvents: 'none',
-                                    userSelect: 'none',
-                                    backdropFilter: 'blur(2px)',
-                                    zIndex: 3
-                                }}>
-                                    <img 
-                                        src="/aic-kibera-logo.png" 
-                                        alt="AIC Kibera Logo" 
-                                        style={{ width: '14px', height: '14px', objectFit: 'contain' }} 
-                                        onError={(e) => { e.target.style.display = 'none'; }}
-                                    />
-                                    AIC KIBERA
-                                </div>
-                            </div>
-
-                            <div style={{ padding: '15px' }}>
-                                <span style={{ fontSize: '0.8rem', color: '#d9534f', fontWeight: 'bold', textTransform: 'uppercase' }}>{image.category}</span>
-                                <h3 style={{ fontSize: '1.1rem', margin: '5px 0 0 0', color: '#333' }}>{image.title}</h3>
-                            </div>
-                        </div>
-                    ))}
+            {/* Pinned Footer */}
+            <footer style={{
+                background: '#1a1a1a',
+                color: '#fff',
+                padding: '25px 20px',
+                textAlign: 'center',
+                borderTop: '3px solid #d9534f',
+                marginTop: 'auto'
+            }}>
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ margin: '0', color: '#aaa', fontSize: '0.9rem' }}>
+                        &copy; {new Date().getFullYear()} AIC Kibera. All rights reserved.
+                    </p>
                 </div>
-            </section>
+            </footer>
 
             {/* Lightbox Modal (Large & Immersive on PC, Responsive on Mobile) */}
             {selectedImage && (
@@ -219,7 +245,7 @@ export default function Gallery() {
                         display: 'flex', 
                         alignItems: 'center', 
                         justifyContent: 'center', 
-                        zIndex: 1000, 
+                        zIndex: 2000, 
                         padding: '20px',
                         boxSizing: 'border-box'
                     }}
@@ -231,7 +257,7 @@ export default function Gallery() {
                             padding: '30px', 
                             borderRadius: '12px', 
                             width: '90vw', 
-                            maxWidth: '1050px', // Large width for PC screens
+                            maxWidth: '1050px',
                             maxHeight: '94vh',
                             overflowY: 'auto',
                             textAlign: 'center', 
@@ -249,7 +275,7 @@ export default function Gallery() {
                             className="lightbox-media-container"
                             style={{ 
                                 width: '100%',
-                                height: '550px', // Large height for PC screens
+                                height: '550px',
                                 background: '#1a1a1a', 
                                 display: 'flex', 
                                 alignItems: 'center', 
