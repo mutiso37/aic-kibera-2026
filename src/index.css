@@ -9096,3 +9096,18 @@ css
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   /* Optional: subtle shadow for depth */
 }
+
+@font-face {
+  font-family: 'YourCustomFont';
+  src: url('/fonts/custom.woff2') format('woff2');
+  font-display: swap;
+}
+
+.hero-section {
+  background-image: url('/hero-bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  /* Use will-change to hint browser optimization */
+  will-change: transform;
+  transform: translateZ(0);
+}

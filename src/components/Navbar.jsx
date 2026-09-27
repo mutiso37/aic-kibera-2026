@@ -1,8 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 40) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        // Attach passive scroll listener for maximum INP & scroll performance
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const closeMenu = () => {
         setIsOpen(false);
@@ -83,7 +101,11 @@ export default function Navbar() {
                 {/* =========================
                     MAIN HEADER
                 ========================= */}
-                <header className="main-header" style={{ background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
+                <header className="main-header" style={{ 
+                    background: '#fff', 
+                    boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.1)' : '0 4px 20px rgba(0,0,0,0.06)',
+                    transition: 'box-shadow 0.3s ease'
+                }}>
 
                     <div className="navbar-container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxSizing: 'border-box' }}>
 
