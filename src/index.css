@@ -1,0 +1,9086 @@
+/* ==========================================================================
+   AIC Kibera Portal - Complete Unified Modern Stylesheet
+   ========================================================================== */
+
+:root {
+  --primary-color: #b71c1c;
+  --primary-dark: #7f0000;
+  --nav-bg: #ffffff;
+  --body-bg: #f8f9fa;
+  --text-color: #2d3748;
+  --text-muted: #718096;
+  --border-color: #e2e8f0;
+  --white: #ffffff;
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text-color);
+  background-color: var(--body-bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==========================================================================
+   Top Bar & Pure White Professional Navigation
+   ========================================================================== */
+.top-bar {
+  background-color: #1a202c;
+  color: var(--white);
+  font-size: 13px;
+  padding: 10px 0;
+}
+
+.top-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contact-info {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.contact-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+.contact-info i {
+  color: var(--primary-color);
+}
+
+.social-top {
+  display: flex;
+  gap: 10px;
+}
+
+.social-top a {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-top a:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.main-header {
+  background-color: var(--nav-bg) !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  position: relative;
+}
+
+.logo img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: var(--primary-color);
+}
+
+/* Professional Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  min-width: 240px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  list-style: none;
+  padding: 12px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: var(--transition);
+  border-top: 3px solid var(--primary-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 10px 10px;
+  z-index: 1100;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu a {
+  padding: 10px 20px;
+  color: var(--text-color);
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.dropdown-menu a:hover {
+  background: #fff5f5;
+  color: var(--primary-color);
+  padding-left: 24px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn-give {
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(183, 28, 28, 0.25);
+}
+
+.btn-give:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(183, 28, 28, 0.35);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+/* ==========================================================================
+   Hero Slider - Alternating Bottom-Left & Bottom-Right Captions
+   ========================================================================== */
+.hero-slider-container {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.slide {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 1s ease-in-out, transform 6s ease-out;
+  display: block !important;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.65);
+}
+
+/* Base styling for slide captions */
+.slide-caption {
+  position: absolute !important;
+  bottom: 50px !important;
+  max-width: 580px !important;
+  color: var(--white) !important;
+  z-index: 10 !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  padding: 30px 40px !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Odd slides (1, 3): Forced Bottom-Left */
+.slide:nth-child(odd) .slide-caption {
+  left: 60px !important;
+  right: auto !important;
+  text-align: left !important;
+  border-left: 5px solid var(--primary-color) !important;
+  border-right: none !important;
+}
+
+/* Even slides (2, 4): Forced Bottom-Right */
+.slide:nth-child(even) .slide-caption {
+  right: 60px !important;
+  left: auto !important;
+  text-align: left !important;
+  border-right: 5px solid var(--primary-color) !important;
+  border-left: none !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-caption h1 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.slide-caption p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #cbd5e1;
+}
+
+/* Slider Controls */
+.slider-controls {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.slider-btn {
+  background: rgba(15, 23, 42, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: var(--white);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: var(--transition);
+  backdrop-filter: blur(4px);
+}
+
+.slider-btn:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Ministries Section - True Side-by-Side Grid Layout
+   ========================================================================== */
+.ministries-section {
+  padding: 90px 24px;
+  background-color: var(--white);
+}
+
+.ministries-section h2 {
+  text-align: center;
+  font-size: 36px;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+.ministries-section .section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.ministries-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 30px !important;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ministry-card {
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100% !important;
+}
+
+.ministry-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary-color);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.ministry-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(183, 28, 28, 0.12);
+  border-color: rgba(183, 28, 28, 0.3);
+}
+
+.ministry-card:hover::before {
+  opacity: 1;
+}
+
+.ministry-img-wrapper {
+  height: 210px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ministry-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ministry-card:hover .ministry-img-wrapper img {
+  transform: scale(1.08);
+}
+
+.ministry-content {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.ministry-content h3 {
+  font-size: 20px;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.ministry-content p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+.ministry-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.ministry-link:hover {
+  color: var(--primary-dark);
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Service Schedule Highlight Banner
+   ========================================================================== */
+.service-times-banner {
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  color: var(--white);
+  padding: 45px 35px;
+  border-radius: 16px;
+  margin: 60px auto;
+  max-width: 1200px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  border-top: 4px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-times-banner h3 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.service-times-banner p {
+  color: #cbd5e1;
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .ministries-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .ministries-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+
+  header.main-header .navbar {
+    display: none !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: var(--white) !important;
+    padding: 24px !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
+    z-index: 1100 !important;
+    box-sizing: border-box;
+    border-bottom: 3px solid var(--primary-color);
+  }
+
+  header.main-header .navbar.mobile-visible {
+    display: block !important;
+  }
+
+  header.main-header .nav-menu {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  header.main-header .nav-menu li {
+    width: 100% !important;
+  }
+
+  header.main-header .nav-menu li a {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    color: var(--text-color) !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  header.main-header .dropdown-menu {
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    background: #f8fafc !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding-left: 15px !important;
+    margin-top: 8px !important;
+  }
+
+  .slide:nth-child(odd) .slide-caption,
+  .slide:nth-child(even) .slide-caption {
+    left: 20px !important;
+    right: 20px !important;
+    max-width: none !important;
+    bottom: 24px !important;
+    padding: 20px !important;
+    border-left: 5px solid var(--primary-color) !important;
+    border-right: none !important;
+  }
+
+  .slide-caption h1 {
+    font-size: 22px;
+  }
+
+  .slider-controls {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+/* --- Horizontal Feature Boxes Section --- */
+.boxes-section {
+  padding: 90px 24px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%);
+}
+
+.boxes-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Impressive Box Styling & Animations --- */
+.stylish-box {
+  flex: 1;
+  min-width: 280px;
+  background: #ffffff;
+  border-radius: 20px;
+  /* Deep rounded corners for a modern look */
+  padding: 45px 35px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06), 0 5px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* Vibrant top accent border that expands on hover */
+.stylish-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #b71c1c, #e53935);
+  opacity: 0.8;
+  transition: height 0.3s ease;
+}
+
+/* Hover Animation: Lifts up, scales slightly, and casts an impressive glow */
+.stylish-box:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(183, 28, 28, 0.15), 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-color: rgba(183, 28, 28, 0.4);
+}
+
+.stylish-box:hover::before {
+  height: 8px;
+  /* Thickens accent bar on hover */
+}
+
+/* Active/Pressable click feedback animation */
+.stylish-box:active {
+  transform: translateY(-4px) scale(1.00);
+  box-shadow: 0 12px 25px rgba(183, 28, 28, 0.2);
+}
+
+.stylish-box h3 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #1a202c;
+  letter-spacing: -0.5px;
+  transition: color 0.3s ease;
+}
+
+.stylish-box:hover h3 {
+  color: #b71c1c;
+  /* Highlights heading text color on hover */
+}
+
+.stylish-box p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+/* Responsive adjustment for mobile screens */
+@media (max-width: 992px) {
+  .boxes-container {
+    flex-wrap: wrap;
+  }
+}
+
+/* =========================================
+   UPDATED NAVIGATION
+   ========================================= */
+
+.navbar-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-dropdown-trigger {
+  border: none;
+  background: transparent;
+  color: inherit;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 0;
+}
+
+.nav-dropdown-trigger i {
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .nav-dropdown-trigger i {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  transform: translateY(0);
+}
+
+.nav-menu>li>a,
+.nav-dropdown-trigger {
+  transition: color 0.25s ease;
+}
+
+.nav-menu>li:hover>a,
+.nav-menu>li:hover>.nav-dropdown-trigger {
+  color: #b71c1c;
+}
+
+.dropdown-menu li a {
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    padding-left 0.25s ease;
+}
+
+.dropdown-menu li a:hover {
+  background: #f8eeee;
+  color: #b71c1c;
+  padding-left: 22px;
+}
+
+
+/* Give button */
+
+.btn-give {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.btn-give:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.16);
+}
+
+
+/* Mobile button */
+
+.mobile-menu-toggle {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+  transform: scale(1.04);
+}
+
+/* =========================================
+   WELCOME PAGE
+   ========================================= */
+
+.welcome-header {
+  min-height: 390px;
+}
+
+
+/* WELCOME INTRO */
+
+.welcome-intro {
+  background: #ffffff;
+}
+
+.welcome-grid {
+  max-width: 1150px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 65px;
+
+  align-items: center;
+}
+
+.welcome-image-card {
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 18px;
+  background: #fff;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.welcome-image-card img {
+  width: 100%;
+  height: 500px;
+
+  display: block;
+  object-fit: cover;
+
+  transition: transform 0.6s ease;
+}
+
+.welcome-image-card:hover img {
+  transform: scale(1.035);
+}
+
+.welcome-image-caption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 16px 18px;
+
+  background: rgba(0, 0, 0, 0.78);
+  color: #fff;
+
+  border-radius: 10px;
+}
+
+.welcome-image-caption>i {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #b71c1c;
+  border-radius: 50%;
+}
+
+.welcome-image-caption strong,
+.welcome-image-caption span {
+  display: block;
+}
+
+.welcome-image-caption span {
+  font-size: 0.82rem;
+  opacity: 0.8;
+  margin-top: 3px;
+}
+
+
+/* MESSAGE */
+
+.welcome-message h2 {
+  font-size: 2.6rem;
+  margin: 5px 0 20px;
+}
+
+.welcome-message h2 span {
+  color: #b71c1c;
+}
+
+.welcome-message p {
+  color: #666;
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+
+.welcome-signature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-top: 30px;
+  padding-top: 25px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.welcome-signature>span {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #b71c1c;
+  background: #fbeaea;
+}
+
+.welcome-signature strong,
+.welcome-signature small {
+  display: block;
+}
+
+.welcome-signature small {
+  margin-top: 4px;
+  color: #777;
+}
+
+
+/* VALUES */
+
+.welcome-values-section {
+  padding: 85px 0;
+  background: #f7f7f7;
+}
+
+.welcome-values-grid {
+  max-width: 1050px;
+  margin: 50px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.welcome-value-card {
+  background: #fff;
+  padding: 35px 28px;
+
+  text-align: center;
+
+  border: 1px solid #eeeeee;
+  border-radius: 14px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.welcome-value-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09);
+  border-color: #b71c1c;
+}
+
+.welcome-value-icon {
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fbeaea;
+  color: #b71c1c;
+
+  font-size: 24px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.welcome-value-card:hover .welcome-value-icon {
+  background: #b71c1c;
+  color: #fff;
+}
+
+.welcome-value-card h3 {
+  margin-bottom: 12px;
+}
+
+.welcome-value-card p {
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+
+/* FELLOWSHIP */
+
+.welcome-fellowship-card {
+  max-width: 1050px;
+  margin: 0 auto;
+
+  padding: 45px;
+
+  display: flex;
+  gap: 35px;
+
+  background: #fff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+}
+
+.fellowship-icon {
+  min-width: 70px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fbeaea;
+  color: #b71c1c;
+
+  font-size: 27px;
+}
+
+.fellowship-content {
+  flex: 1;
+}
+
+.fellowship-content h2 {
+  font-size: 2rem;
+  margin: 5px 0 15px;
+}
+
+.fellowship-content h2 span {
+  color: #b71c1c;
+}
+
+.fellowship-content p {
+  color: #666;
+  line-height: 1.8;
+}
+
+.fellowship-points {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.fellowship-points div {
+  padding: 12px 15px;
+
+  background: #f8f8f8;
+  border-radius: 8px;
+
+  font-size: 0.92rem;
+}
+
+.fellowship-points i {
+  color: #b71c1c;
+  margin-right: 8px;
+}
+
+
+/* SCRIPTURE */
+
+.welcome-scripture {
+  padding: 80px 20px;
+  background: #f7f7f7;
+}
+
+.scripture-card {
+  max-width: 850px;
+  margin: 0 auto;
+
+  text-align: center;
+
+  padding: 50px 35px;
+
+  background: #fff;
+
+  border-radius: 18px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.scripture-icon {
+  width: 55px;
+  height: 55px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #b71c1c;
+  color: #fff;
+}
+
+.scripture-card blockquote {
+  max-width: 700px;
+  margin: 0 auto 15px;
+
+  font-size: 1.45rem;
+  line-height: 1.7;
+
+  font-style: italic;
+  color: #333;
+}
+
+.scripture-card>span {
+  color: #b71c1c;
+  font-weight: 700;
+}
+
+
+/* CTA BUTTONS */
+
+.welcome-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+.btn-outline-light-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 13px 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.btn-outline-light-custom:hover {
+  background: #fff;
+  color: #b71c1c;
+  transform: translateY(-3px);
+}
+
+
+/* WELCOME MOBILE */
+
+@media (max-width: 900px) {
+
+  .welcome-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .welcome-image-card img {
+    height: 400px;
+  }
+
+  .welcome-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-fellowship-card {
+    padding: 35px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .welcome-message h2 {
+    font-size: 2rem;
+  }
+
+  .welcome-image-card img {
+    height: 320px;
+  }
+
+  .welcome-fellowship-card {
+    flex-direction: column;
+    padding: 28px 22px;
+  }
+
+  .fellowship-icon {
+    min-width: 60px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .fellowship-content h2 {
+    font-size: 1.7rem;
+  }
+
+  .fellowship-points {
+    grid-template-columns: 1fr;
+  }
+
+  .scripture-card {
+    padding: 35px 22px;
+  }
+
+  .scripture-card blockquote {
+    font-size: 1.15rem;
+  }
+}
+
+/* =========================================
+   PROGRAMME PAGE
+   ========================================= */
+
+.programme-header {
+  min-height: 390px;
+}
+
+
+/* SUNDAY SERVICES */
+
+.programme-service-grid {
+  max-width: 1100px;
+  margin: 50px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.programme-service-card {
+  position: relative;
+
+  padding: 32px;
+
+  background: #fff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.programme-service-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.10);
+
+  border-color: #b71c1c;
+}
+
+.programme-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.programme-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fbeaea;
+  color: #b71c1c;
+
+  font-size: 22px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.programme-service-card:hover .programme-icon {
+  background: #b71c1c;
+  color: #fff;
+}
+
+.service-number {
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #eeeeee;
+}
+
+.programme-service-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.programme-time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #b71c1c;
+
+  margin-bottom: 15px;
+}
+
+.programme-time i {
+  font-size: 16px;
+}
+
+.programme-service-card p {
+  color: #666;
+  line-height: 1.7;
+
+  margin: 0;
+}
+
+
+/* WEEKLY PROGRAMME */
+
+.weekly-programme-section {
+  padding: 85px 0;
+
+  background: #f7f7f7;
+}
+
+.weekly-timeline {
+  max-width: 950px;
+
+  margin: 50px auto 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.weekly-day-card {
+  display: grid;
+
+  grid-template-columns: 90px 1fr;
+
+  background: #fff;
+
+  border: 1px solid #eeeeee;
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.weekly-day-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 13px 30px rgba(0, 0, 0, 0.09);
+}
+
+.day-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #b71c1c;
+
+  color: #fff;
+
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.day-content {
+  padding: 27px 30px;
+}
+
+.day-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.day-heading h3 {
+  margin: 0;
+}
+
+.day-heading span {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.activity-row {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 17px;
+
+  padding: 15px 0;
+}
+
+.activity-row+.activity-row {
+  border-top: 1px solid #f0f0f0;
+}
+
+.activity-icon {
+  min-width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #fbeaea;
+  color: #b71c1c;
+}
+
+.activity-row h4 {
+  margin: 0 0 7px;
+
+  font-size: 1rem;
+}
+
+.activity-row p {
+  color: #777;
+
+  margin: 0;
+
+  line-height: 1.6;
+}
+
+.activity-time {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #b71c1c;
+
+  font-weight: 700;
+
+  font-size: 0.9rem;
+
+  margin-bottom: 6px;
+}
+
+.featured-day {
+  border-color: #b71c1c;
+}
+
+
+/* THIRD SUNDAY */
+
+.third-sunday-section {
+  padding: 80px 0;
+
+  background: #fff;
+}
+
+.third-sunday-card {
+  max-width: 1050px;
+
+  margin: auto;
+
+  padding: 45px;
+
+  display: flex;
+
+  gap: 35px;
+
+  align-items: flex-start;
+
+  border-radius: 18px;
+
+  background: #fafafa;
+
+  border-left: 5px solid #b71c1c;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.third-sunday-icon {
+  min-width: 70px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fbeaea;
+  color: #b71c1c;
+
+  font-size: 26px;
+}
+
+.third-sunday-content h2 {
+  font-size: 2rem;
+
+  margin: 5px 0 15px;
+}
+
+.third-sunday-content h2 span {
+  color: #b71c1c;
+}
+
+.third-sunday-content p {
+  color: #666;
+
+  line-height: 1.8;
+}
+
+.third-sunday-items {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.third-sunday-items div {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px 16px;
+
+  background: #fff;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 30px;
+
+  font-size: 0.9rem;
+}
+
+.third-sunday-items i {
+  color: #b71c1c;
+}
+
+
+/* CHILDREN & YOUTH */
+
+.next-generation-grid {
+  max-width: 800px;
+
+  margin: 50px auto 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 25px;
+}
+
+.generation-card {
+  text-align: center;
+
+  padding: 35px 30px;
+
+  border-radius: 15px;
+
+  border: 1px solid #eeeeee;
+
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.generation-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.09);
+
+  border-color: #b71c1c;
+}
+
+.generation-icon {
+  width: 62px;
+  height: 62px;
+
+  margin: 0 auto 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #fbeaea;
+  color: #b71c1c;
+
+  font-size: 23px;
+}
+
+.generation-card h3 {
+  margin-bottom: 4px;
+}
+
+.generation-card>span {
+  display: block;
+
+  color: #b71c1c;
+
+  font-size: 0.85rem;
+
+  font-weight: 700;
+
+  margin-bottom: 14px;
+}
+
+.generation-card p {
+  color: #666;
+
+  line-height: 1.7;
+
+  margin: 0;
+}
+
+
+/* PROGRAMME MOBILE */
+
+@media (max-width: 900px) {
+
+  .programme-service-grid {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+  }
+
+  .next-generation-grid {
+    max-width: 650px;
+  }
+
+  .third-sunday-card {
+    padding: 35px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .weekly-day-card {
+    grid-template-columns: 1fr;
+  }
+
+  .day-badge {
+    padding: 12px;
+  }
+
+  .day-content {
+    padding: 22px;
+  }
+
+  .day-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .activity-row {
+    gap: 12px;
+  }
+
+  .third-sunday-card {
+    flex-direction: column;
+    padding: 28px 22px;
+  }
+
+  .third-sunday-items {
+    flex-direction: column;
+  }
+
+  .third-sunday-items div {
+    border-radius: 10px;
+  }
+
+  .next-generation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================================
+   SERVICES IMAGE SLIDER
+   ========================================================= */
+
+.services-image-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #111;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+.services-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0;
+  transform: scale(1.04);
+
+  transition:
+    opacity 1.2s ease-in-out,
+    transform 5s ease-in-out;
+
+  display: flex;
+  align-items: flex-end;
+}
+
+.services-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.services-slide-content {
+  width: 100%;
+  padding: 35px;
+
+  color: #fff;
+
+  background: linear-gradient(transparent,
+      rgba(0, 0, 0, 0.88));
+}
+
+.services-slide-content span {
+  display: inline-block;
+  color: #fff;
+  background: #b71c1c;
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+
+  margin-bottom: 10px;
+}
+
+.services-slide-content h3 {
+  margin: 0 0 8px;
+
+  font-size: clamp(25px, 4vw, 38px);
+  font-weight: 800;
+}
+
+.services-slide-content p {
+  margin: 0;
+  max-width: 650px;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.services-slider-dots {
+  position: absolute;
+
+  bottom: 18px;
+  right: 25px;
+
+  display: flex;
+  gap: 8px;
+
+  z-index: 10;
+}
+
+.services-slider-dots button {
+  width: 9px;
+  height: 9px;
+
+  padding: 0;
+  border: 0;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  cursor: pointer;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.services-slider-dots button.active {
+  width: 28px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+  .services-image-slider {
+    height: 360px;
+    border-radius: 12px;
+  }
+
+  .services-slide-content {
+    padding: 22px;
+  }
+
+  .services-slide-content h3 {
+    font-size: 25px;
+  }
+
+  .services-slide-content p {
+    font-size: 13px;
+  }
+
+  .services-slider-dots {
+    right: 18px;
+    bottom: 15px;
+  }
+}
+
+/* ============================================================
+   A.I.C. KIBERA — FIRST TIME HERE PAGE
+   ============================================================ */
+
+.first-time-page {
+  background: #ffffff;
+  color: #222;
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.first-time-hero {
+  min-height: 680px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.first-time-hero-content {
+  max-width: 760px;
+  padding: 100px 0;
+}
+
+.first-time-eyebrow {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #b71c1c;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 22px;
+}
+
+.first-time-hero h1 {
+  margin: 0;
+  font-size: clamp(45px, 6vw, 78px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.first-time-hero h1 span {
+  color: #e53935;
+}
+
+.first-time-hero p {
+  max-width: 650px;
+  margin: 25px 0 32px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.first-time-hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.first-time-primary-btn,
+.first-time-secondary-btn,
+.first-time-outline-btn,
+.first-time-dark-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 24px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.first-time-primary-btn {
+  background: #b71c1c;
+  color: #fff;
+  border: 1px solid #b71c1c;
+}
+
+.first-time-primary-btn:hover {
+  background: #8f1515;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.first-time-secondary-btn {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.first-time-secondary-btn:hover {
+  background: #fff;
+  color: #222;
+  transform: translateY(-2px);
+}
+
+.first-time-hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  opacity: 0.75;
+}
+
+.first-time-hero-scroll i {
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   SECTION COMMON
+   ============================================================ */
+
+.first-time-section-label {
+  display: inline-block;
+  color: #b71c1c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 13px;
+}
+
+.first-time-welcome h2,
+.first-time-section-heading h2,
+.first-time-centered-heading h2,
+.church-life-content h2,
+.first-time-final-content h2 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  font-weight: 800;
+  color: #171717;
+}
+
+.first-time-welcome h2 span,
+.first-time-section-heading h2 span,
+.first-time-centered-heading h2 span,
+.church-life-content h2 span {
+  color: #b71c1c;
+  display: inline;
+}
+
+.first-time-centered-heading {
+  max-width: 720px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.first-time-centered-heading p {
+  margin: 18px auto 0;
+  max-width: 650px;
+  color: #666;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   WELCOME
+   ============================================================ */
+
+.first-time-welcome {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.first-time-welcome-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 75px;
+  align-items: center;
+}
+
+.first-time-visual {
+  position: relative;
+  padding-bottom: 25px;
+}
+
+.first-time-visual .services-image-slider {
+  height: 520px;
+}
+
+.first-time-visual-badge {
+  position: absolute;
+  bottom: 0;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  background: #fff;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+}
+
+.visual-badge-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #b71c1c;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.first-time-visual-badge strong,
+.first-time-visual-badge span {
+  display: block;
+}
+
+.first-time-visual-badge strong {
+  font-size: 14px;
+}
+
+.first-time-visual-badge span {
+  margin-top: 3px;
+  color: #777;
+  font-size: 12px;
+}
+
+.first-time-welcome-content {
+  max-width: 590px;
+}
+
+.first-time-heading-line {
+  width: 60px;
+  height: 3px;
+  margin: 22px 0;
+  background: #b71c1c;
+}
+
+.first-time-welcome-content p {
+  color: #666;
+  line-height: 1.85;
+  font-size: 15px;
+}
+
+.first-time-welcome-content .lead-text {
+  font-size: 17px;
+  color: #444;
+}
+
+.welcome-highlight {
+  margin-top: 28px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #f8f8f8;
+  border-left: 4px solid #b71c1c;
+}
+
+.welcome-highlight-icon {
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #b71c1c;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.welcome-highlight strong,
+.welcome-highlight span {
+  display: block;
+}
+
+.welcome-highlight strong {
+  color: #222;
+}
+
+.welcome-highlight span {
+  margin-top: 4px;
+  color: #777;
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   SERVICES SLIDER
+   ============================================================ */
+
+.services-image-slider {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  background: #111;
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16);
+}
+
+.services-slider-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: serviceImageZoom 5s ease forwards;
+}
+
+@keyframes serviceImageZoom {
+  from {
+    transform: scale(1.05);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.services-slider-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.82),
+      rgba(0, 0, 0, 0.05) 65%);
+  z-index: 2;
+}
+
+.services-slide-content {
+  position: absolute;
+  left: 35px;
+  right: 35px;
+  bottom: 35px;
+  color: #fff;
+  z-index: 5;
+}
+
+.services-slider-label {
+  display: inline-block;
+  background: #b71c1c;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+
+.services-slide-content h3 {
+  margin: 0 0 7px;
+  font-size: clamp(25px, 3vw, 38px);
+  font-weight: 800;
+}
+
+.services-slide-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+}
+
+.services-slider-dots {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 10;
+}
+
+.services-slider-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.services-slider-dots button.active {
+  width: 26px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.services-slide-counter {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  z-index: 10;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   SUNDAY SERVICES
+   ============================================================ */
+
+.first-time-services {
+  padding: 100px 0;
+  background: #f7f7f7;
+}
+
+.first-time-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 55px;
+}
+
+.first-time-section-heading>p {
+  max-width: 440px;
+  margin: 0;
+  color: #666;
+  line-height: 1.8;
+}
+
+.first-time-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.first-time-service-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eee;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.first-time-service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.first-time-service-card.featured {
+  border-top: 4px solid #b71c1c;
+}
+
+.service-card-top {
+  padding: 25px 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-card-number {
+  font-size: 12px;
+  font-weight: 800;
+  color: #aaa;
+  letter-spacing: 1px;
+}
+
+.service-card-icon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7eeee;
+  color: #b71c1c;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.service-card-body {
+  padding: 25px;
+}
+
+.service-language {
+  font-size: 10px;
+  font-weight: 800;
+  color: #b71c1c;
+  letter-spacing: 2px;
+}
+
+.service-card-body h3 {
+  margin: 8px 0 15px;
+  font-size: 24px;
+  color: #222;
+}
+
+.service-card-time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.service-card-time i {
+  color: #b71c1c;
+}
+
+.service-card-body p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   WHAT TO EXPECT
+   ============================================================ */
+
+.first-time-expect {
+  padding: 105px 0;
+  background: #fff;
+}
+
+.first-time-expect-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.expect-item {
+  position: relative;
+  padding: 35px 25px;
+  border: 1px solid #eee;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.expect-item:hover {
+  transform: translateY(-7px);
+  border-color: #ddd;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.expect-number {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.expect-icon {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  color: #b71c1c;
+  background: #f8eeee;
+  border-radius: 50%;
+  font-size: 19px;
+}
+
+.expect-item h3 {
+  margin: 0 0 10px;
+  color: #222;
+  font-size: 19px;
+}
+
+.expect-item p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   CHURCH LIFE
+   ============================================================ */
+
+.first-time-church-life {
+  padding: 105px 0;
+  background: #f7f7f7;
+}
+
+.church-life-wrapper {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.church-life-content {
+  max-width: 560px;
+}
+
+.church-life-content p {
+  margin: 20px 0 25px;
+  color: #666;
+  line-height: 1.85;
+}
+
+.church-life-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.church-life-features div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #444;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.church-life-features i {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #b71c1c;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+}
+
+.first-time-dark-btn {
+  background: #222;
+  color: #fff;
+}
+
+.first-time-dark-btn:hover {
+  background: #b71c1c;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.church-life-image .services-image-slider {
+  height: 480px;
+}
+
+
+/* ============================================================
+   CHILDREN & YOUTH
+   ============================================================ */
+
+.first-time-generation {
+  padding: 105px 0;
+  background: #fff;
+}
+
+.generation-grid {
+  max-width: 950px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.generation-card {
+  display: flex;
+  gap: 22px;
+  padding: 32px;
+  border: 1px solid #eee;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.generation-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.generation-icon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8eeee;
+  color: #b71c1c;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.generation-card span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #b71c1c;
+  letter-spacing: 1.5px;
+}
+
+.generation-card h3 {
+  margin: 5px 0 8px;
+  font-size: 22px;
+}
+
+.generation-card p {
+  margin: 0;
+  color: #777;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   THIRD SUNDAY
+   ============================================================ */
+
+.third-sunday-feature {
+  padding: 90px 0;
+  background: #b71c1c;
+  color: #fff;
+}
+
+.third-sunday-inner {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 35px;
+  align-items: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.third-sunday-symbol {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  font-size: 34px;
+}
+
+.third-sunday-content>span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.third-sunday-content h2 {
+  margin: 8px 0 15px;
+  font-size: 38px;
+}
+
+.third-sunday-content h2 strong {
+  color: #fff;
+}
+
+.third-sunday-content p {
+  max-width: 800px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+}
+
+.third-sunday-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.third-sunday-list div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.third-sunday-list i {
+  font-size: 14px;
+}
+
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+
+.first-time-final-cta {
+  padding: 110px 0;
+  background:
+    linear-gradient(rgba(15, 15, 15, 0.91),
+      rgba(15, 15, 15, 0.91)),
+    url('/hero-bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+.first-time-final-content {
+  max-width: 760px;
+  margin: auto;
+}
+
+.first-time-final-content>span {
+  color: #e53935;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.first-time-final-content h2 {
+  margin-top: 12px;
+  color: #fff;
+  font-size: clamp(36px, 5vw, 55px);
+}
+
+.first-time-final-content h2 strong {
+  color: #e53935;
+}
+
+.first-time-final-content p {
+  max-width: 620px;
+  margin: 20px auto 30px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.final-cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.first-time-outline-btn {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.first-time-outline-btn:hover {
+  background: #fff;
+  color: #222;
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .first-time-welcome-grid,
+  .church-life-wrapper {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .first-time-welcome-content,
+  .church-life-content {
+    max-width: 100%;
+  }
+
+  .first-time-service-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .first-time-expect-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .church-life-image {
+    order: -1;
+  }
+
+  .first-time-visual .services-image-slider,
+  .church-life-image .services-image-slider {
+    height: 450px;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .first-time-hero {
+    min-height: 600px;
+  }
+
+  .first-time-hero-content {
+    padding: 80px 0;
+  }
+
+  .first-time-hero h1 {
+    font-size: 45px;
+    letter-spacing: -1px;
+  }
+
+  .first-time-hero p {
+    font-size: 15px;
+  }
+
+  .first-time-hero-scroll {
+    display: none;
+  }
+
+  .first-time-welcome,
+  .first-time-services,
+  .first-time-expect,
+  .first-time-church-life,
+  .first-time-generation {
+    padding: 70px 0;
+  }
+
+  .first-time-section-heading {
+    display: block;
+  }
+
+  .first-time-section-heading>p {
+    margin-top: 20px;
+  }
+
+  .first-time-service-grid,
+  .first-time-expect-grid,
+  .generation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .first-time-visual .services-image-slider,
+  .church-life-image .services-image-slider {
+    height: 350px;
+  }
+
+  .first-time-visual-badge {
+    left: 12px;
+    right: 12px;
+  }
+
+  .services-slide-content {
+    left: 20px;
+    right: 20px;
+    bottom: 25px;
+  }
+
+  .services-slider-dots {
+    right: 20px;
+    bottom: 20px;
+  }
+
+  .church-life-features {
+    grid-template-columns: 1fr;
+  }
+
+  .third-sunday-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .third-sunday-symbol {
+    margin: auto;
+  }
+
+  .third-sunday-list {
+    justify-content: center;
+  }
+
+  .third-sunday-content h2 {
+    font-size: 30px;
+  }
+}
+
+/* ============================================================
+   WHAT CAN YOU EXPECT — PROFESSIONAL BOXES
+   ============================================================ */
+
+.first-time-expect {
+  padding: 105px 0;
+  background: #f7f5f2;
+}
+
+.first-time-expect-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+/* Individual box */
+.expect-item {
+  position: relative;
+  padding: 38px 28px 32px;
+  background: #ffffff;
+  border: 1px solid #e9e4df;
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Small top accent */
+.expect-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 38px;
+  height: 3px;
+  background: #b71c1c;
+  border-radius: 0 0 5px 5px;
+}
+
+/* Soft hover */
+.expect-item:hover {
+  transform: translateY(-6px);
+  border-color: #ddd5ce;
+  box-shadow: 0 18px 35px rgba(55, 45, 35, 0.09);
+}
+
+/* Number */
+.expect-number {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  color: #d8d1ca;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Icon */
+.expect-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+
+  /* Soft background instead of bright red */
+  background: #f2ece7;
+  color: #8f2929;
+
+  border-radius: 12px;
+  font-size: 19px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.expect-item:hover .expect-icon {
+  background: #8f2929;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Heading */
+.expect-item h3 {
+  margin: 0 0 11px;
+  color: #292522;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+/* Description */
+.expect-item p {
+  margin: 0;
+  color: #77716c;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .first-time-expect-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .first-time-expect {
+    padding: 75px 0;
+  }
+
+  .first-time-expect-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .expect-item {
+    padding: 32px 24px 28px;
+  }
+
+}
+
+/* ============================================================
+   A.I.C. KIBERA — SUNDAY & WEEKLY PROGRAMME
+   ============================================================ */
+
+.programme-page {
+  background: #fff;
+  color: #292522;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.programme-hero {
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.programme-hero-content {
+  max-width: 760px;
+  padding: 100px 0;
+}
+
+.programme-hero-content>span {
+  display: inline-block;
+  padding: 7px 14px;
+  background: #b71c1c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.programme-hero h1 {
+  margin: 20px 0;
+  font-size: clamp(42px, 6vw, 70px);
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+.programme-hero h1 strong {
+  color: #e05252;
+}
+
+.programme-hero p {
+  max-width: 650px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+.programme-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.programme-hero-btn,
+.programme-hero-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 23px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.programme-hero-btn {
+  background: #b71c1c;
+  color: #fff;
+}
+
+.programme-hero-btn:hover {
+  background: #8f1515;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.programme-hero-outline {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.programme-hero-outline:hover {
+  background: #fff;
+  color: #222;
+}
+
+
+/* ============================================================
+   COMMON
+   ============================================================ */
+
+.programme-label {
+  display: inline-block;
+  color: #9b2929;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.programme-centered-heading {
+  max-width: 720px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.programme-centered-heading h2,
+.programme-section-heading h2,
+.programme-intro h2 {
+  margin: 10px 0 0;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.programme-centered-heading h2 span,
+.programme-section-heading h2 span,
+.programme-intro h2 span {
+  color: #b71c1c;
+}
+
+.programme-centered-heading p {
+  margin: 17px auto 0;
+  color: #777;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
+.programme-intro {
+  padding: 75px 0;
+  background: #f7f5f2;
+}
+
+.programme-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.programme-intro p {
+  margin: 0;
+  color: #706b66;
+  line-height: 1.9;
+}
+
+
+/* ============================================================
+   SUNDAY SERVICES
+   ============================================================ */
+
+.programme-sunday {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.programme-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.programme-section-heading>p {
+  max-width: 430px;
+  margin: 0;
+  color: #777;
+  line-height: 1.8;
+}
+
+.programme-sunday-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.programme-sunday-card {
+  position: relative;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #e8e3de;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.programme-sunday-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 40px rgba(55, 45, 35, 0.09);
+}
+
+.programme-sunday-card.featured {
+  border-top: 4px solid #b71c1c;
+}
+
+.programme-card-number {
+  position: absolute;
+  right: 22px;
+  top: 18px;
+  color: #d8d1ca;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.programme-card-icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.programme-sunday-card>span {
+  font-size: 10px;
+  color: #9b2929;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.programme-sunday-card h3 {
+  margin: 7px 0 15px;
+  font-size: 23px;
+}
+
+.programme-card-time {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+}
+
+.programme-card-time i {
+  color: #b71c1c;
+}
+
+.programme-sunday-card p {
+  margin: 17px 0 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   WEEKLY PROGRAMME
+   ============================================================ */
+
+.weekly-programme {
+  padding: 105px 0;
+  background: #f7f5f2;
+}
+
+.weekly-programme-list {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.weekly-programme-day {
+  display: grid;
+  grid-template-columns: 120px 3px 1fr;
+  gap: 30px;
+  margin-bottom: 12px;
+}
+
+.day-name {
+  padding-top: 28px;
+  text-align: right;
+}
+
+.day-name strong {
+  display: block;
+  color: #b71c1c;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.day-name span {
+  display: block;
+  margin-top: 4px;
+  color: #888;
+  font-size: 12px;
+}
+
+.day-line {
+  position: relative;
+  background: #ded7d0;
+}
+
+.day-line::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 13px;
+  background: #b71c1c;
+  border: 4px solid #f7f5f2;
+  border-radius: 50%;
+}
+
+.day-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 15px;
+}
+
+.weekly-activity {
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  background: #fff;
+  border: 1px solid #e9e4df;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.weekly-activity:hover {
+  transform: translateX(5px);
+  box-shadow: 0 12px 30px rgba(55, 45, 35, 0.07);
+}
+
+.activity-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 10px;
+}
+
+.activity-icon.office {
+  background: #eeeae5;
+}
+
+.activity-icon.prayer {
+  background: #f3ebe8;
+}
+
+.activity-icon.worship {
+  background: #eee9e5;
+}
+
+.activity-type {
+  font-size: 9px;
+  font-weight: 800;
+  color: #9b2929;
+  letter-spacing: 1.5px;
+}
+
+.weekly-activity h3 {
+  margin: 5px 0 6px;
+  font-size: 18px;
+  color: #2d2926;
+}
+
+.weekly-activity p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.activity-time {
+  display: inline-block;
+  margin-top: 3px;
+  color: #444;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   JOIN MINISTRY
+   ============================================================ */
+
+.join-ministry-section {
+  padding: 105px 0;
+  background: #fff;
+}
+
+.ministry-interest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.ministry-interest-card {
+  padding: 30px;
+  border: 1px solid #e8e3de;
+  border-radius: 14px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.ministry-interest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(55, 45, 35, 0.08);
+}
+
+.ministry-interest-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 12px;
+}
+
+.ministry-interest-card>span {
+  font-size: 9px;
+  color: #9b2929;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.ministry-interest-card h3 {
+  margin: 7px 0 10px;
+  font-size: 20px;
+}
+
+.ministry-interest-card p {
+  min-height: 70px;
+  margin: 0 0 20px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.ministry-interest-card button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #9b2929;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ministry-interest-card button:hover {
+  color: #b71c1c;
+}
+
+
+/* ============================================================
+   MINISTRY FORM
+   ============================================================ */
+
+.ministry-form-section {
+  padding: 100px 0;
+  background: #f7f5f2;
+}
+
+.ministry-form-wrapper {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.ministry-form-intro h2 {
+  margin: 10px 0 18px;
+  font-size: 42px;
+}
+
+.ministry-form-intro h2 span {
+  color: #b71c1c;
+}
+
+.ministry-form-intro>p {
+  color: #777;
+  line-height: 1.8;
+}
+
+.form-info-item {
+  display: flex;
+  gap: 12px;
+  margin-top: 25px;
+  padding: 18px;
+  background: #fff;
+  border-left: 3px solid #b71c1c;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.form-info-item i {
+  color: #b71c1c;
+}
+
+.ministry-form-card {
+  padding: 35px;
+  background: #fff;
+  border: 1px solid #e7e1db;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(55, 45, 35, 0.06);
+}
+
+.programme-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.programme-form-group {
+  margin-bottom: 20px;
+}
+
+.programme-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #393431;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.programme-form-group input,
+.programme-form-group select,
+.programme-form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  border: 1px solid #ddd7d1;
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.programme-form-group input:focus,
+.programme-form-group select:focus,
+.programme-form-group textarea:focus {
+  border-color: #b71c1c;
+}
+
+.programme-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 23px;
+  border: 0;
+  background: #b71c1c;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.programme-submit-btn:hover {
+  background: #8f1515;
+  transform: translateY(-2px);
+}
+
+.form-success-message {
+  padding: 30px;
+  text-align: center;
+}
+
+.form-success-message>div {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 50%;
+  font-size: 23px;
+}
+
+.form-success-message h3 {
+  margin: 18px 0 8px;
+}
+
+.form-success-message p {
+  color: #777;
+  line-height: 1.7;
+}
+
+.form-success-message button {
+  border: 0;
+  background: transparent;
+  color: #9b2929;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   PASTORS' OFFICE
+   ============================================================ */
+
+.pastors-office-section {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.pastors-office-wrapper {
+  display: grid;
+  grid-template-columns: 85px 1fr auto;
+  align-items: center;
+  gap: 30px;
+  padding: 38px;
+  border: 1px solid #e5dfd9;
+  border-radius: 14px;
+  background: #faf9f7;
+}
+
+.pastors-office-icon {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 50%;
+  font-size: 27px;
+}
+
+.pastors-office-content>span {
+  font-size: 10px;
+  font-weight: 800;
+  color: #9b2929;
+  letter-spacing: 1.5px;
+}
+
+.pastors-office-content h2 {
+  margin: 5px 0 8px;
+  font-size: 27px;
+}
+
+.pastors-office-content p {
+  max-width: 650px;
+  margin: 0;
+  color: #777;
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.office-hours {
+  display: flex;
+  gap: 30px;
+  margin-top: 18px;
+}
+
+.office-hours div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.office-hours strong {
+  font-size: 12px;
+}
+
+.office-hours span {
+  color: #777;
+  font-size: 12px;
+}
+
+.pastors-office-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 19px;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pastors-office-btn:hover {
+  background: #b71c1c;
+  color: #fff;
+}
+
+
+/* ============================================================
+   PASTORAL ROTA
+   ============================================================ */
+
+.pastoral-rota-section {
+  padding: 95px 0;
+  background: #f7f5f2;
+}
+
+.rota-notice {
+  max-width: 850px;
+  margin: auto;
+  display: flex;
+  gap: 25px;
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #e5dfd9;
+  border-radius: 14px;
+}
+
+.rota-notice-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2ece7;
+  color: #8f2929;
+  border-radius: 12px;
+  font-size: 21px;
+}
+
+.rota-notice h3 {
+  margin: 0 0 8px;
+}
+
+.rota-notice p {
+  margin: 0 0 15px;
+  color: #777;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.rota-notice a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #9b2929;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   THIRD SUNDAY
+   ============================================================ */
+
+.programme-third-sunday {
+  padding: 85px 0;
+  background: #b71c1c;
+  color: #fff;
+}
+
+.third-sunday-programme-card {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.third-sunday-programme-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+.third-sunday-programme-card>div:last-child>span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+.third-sunday-programme-card h2 {
+  margin: 7px 0 10px;
+  font-size: 35px;
+}
+
+.third-sunday-programme-card p {
+  max-width: 750px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+}
+
+.third-sunday-programme-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.third-sunday-programme-items span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   HELP / CTA
+   ============================================================ */
+
+.programme-help {
+  padding: 100px 0;
+  background:
+    linear-gradient(rgba(15, 15, 15, 0.92),
+      rgba(15, 15, 15, 0.92)),
+    url('/hero-bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+.programme-help-content {
+  max-width: 750px;
+  margin: auto;
+}
+
+.programme-help-content>span {
+  color: #e05252;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.programme-help-content h2 {
+  margin: 10px 0 15px;
+  color: #fff;
+  font-size: 45px;
+}
+
+.programme-help-content h2 strong {
+  color: #e05252;
+}
+
+.programme-help-content p {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.8;
+}
+
+.programme-help-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.programme-help-primary,
+.programme-help-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.programme-help-primary {
+  background: #b71c1c;
+  color: #fff;
+}
+
+.programme-help-primary:hover {
+  background: #8f1515;
+  color: #fff;
+}
+
+.programme-help-secondary {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.programme-help-secondary:hover {
+  background: #fff;
+  color: #222;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .programme-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .programme-sunday-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ministry-interest-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ministry-form-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .pastors-office-wrapper {
+    grid-template-columns: 75px 1fr;
+  }
+
+  .pastors-office-btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .programme-hero {
+    min-height: 560px;
+  }
+
+  .programme-hero-content {
+    padding: 80px 0;
+  }
+
+  .programme-hero h1 {
+    font-size: 44px;
+  }
+
+  .programme-hero p {
+    font-size: 15px;
+  }
+
+  .programme-intro,
+  .programme-sunday,
+  .weekly-programme,
+  .join-ministry-section,
+  .ministry-form-section,
+  .pastoral-rota-section {
+    padding: 70px 0;
+  }
+
+  .programme-section-heading {
+    display: block;
+  }
+
+  .programme-section-heading>p {
+    margin-top: 18px;
+  }
+
+  .programme-sunday-grid,
+  .ministry-interest-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weekly-programme-day {
+    grid-template-columns: 65px 2px 1fr;
+    gap: 15px;
+  }
+
+  .day-name strong {
+    font-size: 16px;
+  }
+
+  .day-name span {
+    font-size: 10px;
+  }
+
+  .weekly-activity {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .programme-form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .ministry-form-card {
+    padding: 23px;
+  }
+
+  .pastors-office-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .pastors-office-icon {
+    margin: auto;
+  }
+
+  .pastors-office-btn {
+    grid-column: auto;
+    justify-self: center;
+  }
+
+  .office-hours {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .rota-notice {
+    flex-direction: column;
+  }
+
+  .rota-notice-icon {
+    margin: auto;
+  }
+
+  .third-sunday-programme-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .third-sunday-programme-icon {
+    margin: auto;
+  }
+
+  .third-sunday-programme-items {
+    justify-content: center;
+  }
+
+  .programme-help-content h2 {
+    font-size: 36px;
+  }
+
+}
+
+/* =========================================================
+   SUNDAY & WEEKLY PROGRAMME
+   ========================================================= */
+
+.programme-services,
+.programme-weekly {
+  padding: 95px 0;
+  background: #f7f8fa;
+}
+
+.programme-weekly {
+  background: #ffffff;
+}
+
+.programme-section-heading {
+  max-width: 760px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.programme-section-heading .section-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 7px 16px;
+  border-radius: 30px;
+  background: #f1e8e8;
+  color: #8f2929;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.programme-section-heading h2 {
+  margin: 0 0 15px;
+  color: #272727;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.programme-section-heading p {
+  margin: 0;
+  color: #777;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   SUNDAY SERVICE CARDS
+   ========================= */
+
+.programme-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.programme-service-card {
+  position: relative;
+  padding: 38px 30px 32px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(30, 35, 40, 0.06);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Top accent line */
+.programme-service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #8f2929;
+}
+
+/* Soft background glow */
+.programme-service-card::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -55px;
+  bottom: -55px;
+  border-radius: 50%;
+  background: rgba(143, 41, 41, 0.06);
+  transition: transform 0.35s ease;
+}
+
+.programme-service-card:hover {
+  transform: translateY(-8px);
+  border-color: #d8c4c4;
+  box-shadow: 0 18px 40px rgba(40, 35, 35, 0.12);
+}
+
+.programme-service-card:hover::after {
+  transform: scale(1.5);
+}
+
+.programme-service-icon {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 23px;
+  border-radius: 15px;
+  background: #f4eeee;
+  color: #8f2929;
+  font-size: 22px;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.programme-service-card:hover .programme-service-icon {
+  background: #8f2929;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.programme-service-card h3 {
+  margin: 0 0 12px;
+  color: #292929;
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.programme-service-card p {
+  margin: 0 0 22px;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.programme-service-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 30px;
+  background: #f5f5f5;
+  color: #555;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.programme-service-time i {
+  color: #8f2929;
+}
+
+
+/* =========================
+   WEEKLY PROGRAMME
+   ========================= */
+
+.weekly-programme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.weekly-programme-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 125px;
+  padding: 24px 27px;
+  background: #fafafa;
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Colored side accent */
+.weekly-programme-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  background: #8f2929;
+  transition: width 0.3s ease;
+}
+
+.weekly-programme-card:hover {
+  transform: translateY(-5px);
+  background: #ffffff;
+  border-color: #ded2d2;
+  box-shadow: 0 15px 32px rgba(35, 35, 35, 0.09);
+}
+
+.weekly-programme-card:hover::before {
+  width: 6px;
+}
+
+.weekly-programme-icon {
+  flex: 0 0 58px;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #f0e7e7;
+  color: #8f2929;
+  font-size: 19px;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.weekly-programme-card:hover .weekly-programme-icon {
+  background: #8f2929;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.weekly-programme-content {
+  flex: 1;
+}
+
+.weekly-programme-day {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #8f2929;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.weekly-programme-card h3 {
+  margin: 0 0 6px;
+  color: #292929;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.weekly-programme-card p {
+  margin: 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.weekly-programme-time {
+  flex-shrink: 0;
+  padding: 8px 13px;
+  border-radius: 20px;
+  background: #f2eeee;
+  color: #8f2929;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+
+/* =========================
+   SECTION BUTTONS
+   ========================= */
+
+.programme-btn,
+.programme-primary-btn,
+.programme-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.programme-primary-btn {
+  background: #8f2929;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(143, 41, 41, 0.18);
+}
+
+.programme-primary-btn:hover {
+  background: #6f1f1f;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(143, 41, 41, 0.25);
+}
+
+.programme-secondary-btn {
+  background: #ffffff;
+  color: #8f2929;
+  border-color: #d8c4c4;
+}
+
+.programme-secondary-btn:hover {
+  background: #8f2929;
+  color: #ffffff;
+  border-color: #8f2929;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(143, 41, 41, 0.18);
+}
+
+.programme-btn:active,
+.programme-primary-btn:active,
+.programme-secondary-btn:active {
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   MINISTRY FORM BUTTON
+   ========================= */
+
+.programme-submit-btn {
+  position: relative;
+  width: 100%;
+  min-height: 54px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #8f2929;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(143, 41, 41, 0.18);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.programme-submit-btn:hover {
+  background: #6f1f1f;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(143, 41, 41, 0.25);
+}
+
+.programme-submit-btn:active {
+  transform: translateY(-1px);
+}
+
+.programme-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 900px) {
+  .programme-service-grid {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+  }
+
+  .weekly-programme-grid {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .programme-services,
+  .programme-weekly {
+    padding: 70px 0;
+  }
+
+  .programme-section-heading {
+    margin-bottom: 35px;
+  }
+
+  .programme-service-card {
+    padding: 30px 24px;
+  }
+
+  .weekly-programme-card {
+    align-items: flex-start;
+    gap: 15px;
+    padding: 22px 20px;
+  }
+
+  .weekly-programme-icon {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .weekly-programme-time {
+    align-self: flex-start;
+    font-size: 11px;
+    padding: 7px 10px;
+  }
+
+  .programme-service-card h3 {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekly-programme-card {
+    display: block;
+  }
+
+  .weekly-programme-icon {
+    margin-bottom: 14px;
+  }
+
+  .weekly-programme-time {
+    display: inline-block;
+    margin-top: 12px;
+  }
+}
+/* ============================================================
+   A.I.C. KIBERA PROGRAMME PAGE
+   PROFESSIONAL VERSION
+   ============================================================ */
+
+.programme-page {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.programme-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.programme-hero {
+  position: relative;
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(115deg,
+      rgba(32, 25, 25, 0.92),
+      rgba(92, 30, 30, 0.72)),
+    url("/hero-bg1.jpg") center/cover no-repeat;
+}
+
+.programme-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 30%,
+      rgba(255, 255, 255, 0.09),
+      transparent 35%);
+}
+
+.programme-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  padding: 90px 0;
+  color: #ffffff;
+}
+
+.programme-eyebrow {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.programme-hero h1 {
+  margin: 0 0 20px;
+  font-size: clamp(38px, 6vw, 66px);
+  line-height: 1.08;
+  font-weight: 850;
+  letter-spacing: -1.5px;
+}
+
+.programme-hero p {
+  max-width: 650px;
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.programme-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.programme-primary-btn,
+.programme-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 50px;
+  padding: 13px 23px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease;
+}
+
+.programme-primary-btn {
+  background: #a62e2e;
+  color: #ffffff;
+  border: 2px solid #a62e2e;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .15);
+}
+
+.programme-primary-btn:hover {
+  background: #7f2222;
+  border-color: #7f2222;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .22);
+}
+
+.programme-secondary-btn {
+  background: #ffffff;
+  color: #7f2222;
+  border: 2px solid #ffffff;
+}
+
+.programme-secondary-btn:hover {
+  background: #a62e2e;
+  border-color: #a62e2e;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, .16);
+}
+
+.hero-secondary {
+  background: rgba(255, 255, 255, .08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(8px);
+}
+
+
+/* ============================================================
+   CHOIR SLIDER
+   ============================================================ */
+
+.programme-choir-slider {
+  background: #171515;
+}
+
+.choir-slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 570px;
+  overflow: hidden;
+}
+
+.choir-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+.choir-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.choir-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.choir-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(0, 0, 0, .82) 0%,
+      rgba(0, 0, 0, .58) 42%,
+      rgba(0, 0, 0, .18) 100%);
+}
+
+.choir-slide-content {
+  position: absolute;
+  left: max(40px, calc((100% - 1180px) / 2));
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(650px, calc(100% - 80px));
+  color: #ffffff;
+}
+
+.choir-slide-label {
+  display: inline-block;
+  margin-bottom: 17px;
+  padding: 7px 14px;
+  border-left: 3px solid #d49b72;
+  background: rgba(255, 255, 255, .08);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.choir-slide-content h2 {
+  margin: 0 0 17px;
+  font-size: clamp(32px, 5vw, 58px);
+  line-height: 1.08;
+  font-weight: 850;
+}
+
+.choir-slide-content p {
+  max-width: 610px;
+  margin: 0;
+  color: rgba(255, 255, 255, .88);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.choir-slide-line {
+  width: 70px;
+  height: 3px;
+  margin: 25px 0 15px;
+  background: #b47a5e;
+}
+
+.choir-scripture {
+  color: rgba(255, 255, 255, .78);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.choir-slider-controls {
+  position: absolute;
+  right: max(30px, calc((100% - 1180px) / 2));
+  bottom: 30px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.choir-slider-controls>button {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .25);
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+.choir-slider-controls>button:hover {
+  background: #a62e2e;
+  transform: translateY(-2px);
+}
+
+.choir-slider-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.choir-slider-dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .4);
+  cursor: pointer;
+  transition:
+    width .25s ease,
+    background .25s ease;
+}
+
+.choir-slider-dots button.active {
+  width: 28px;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
+.programme-intro {
+  padding: 95px 0;
+  background: #ffffff;
+}
+
+.programme-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #8f2929;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.7px;
+}
+
+.programme-intro h2 {
+  margin: 0;
+  color: #292727;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.2;
+}
+
+.programme-intro p {
+  margin: 0 0 14px;
+  color: #706c69;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.programme-intro p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ============================================================
+   SECTION HEADINGS
+   ============================================================ */
+
+.programme-section-heading {
+  max-width: 720px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.programme-section-heading h2 {
+  margin: 0 0 15px;
+  color: #292727;
+  font-size: clamp(30px, 4vw, 43px);
+  line-height: 1.2;
+}
+
+.programme-section-heading p {
+  margin: 0;
+  color: #77716d;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   SUNDAY SERVICES
+   ============================================================ */
+
+.programme-services {
+  padding: 100px 0;
+  background: #f7f6f4;
+}
+
+.programme-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.programme-service-card {
+  position: relative;
+  min-width: 0;
+  padding: 38px 32px;
+  background: #ffffff;
+  border: 1px solid #e8e4e1;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 7px 24px rgba(40, 30, 25, .055);
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    border-color .3s ease;
+}
+
+.programme-service-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  background: #9c3030;
+}
+
+.programme-service-card:hover {
+  transform: translateY(-8px);
+  border-color: #d7c4c0;
+  box-shadow: 0 20px 40px rgba(40, 30, 25, .12);
+}
+
+.programme-service-icon {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  border-radius: 15px;
+  background: #f3e9e7;
+  color: #922929;
+  font-size: 21px;
+  transition:
+    background .3s ease,
+    color .3s ease,
+    transform .3s ease;
+}
+
+.programme-service-card:hover .programme-service-icon {
+  background: #922929;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.service-number {
+  position: absolute;
+  top: 26px;
+  right: 27px;
+  color: #d6cdca;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.programme-service-card h3 {
+  margin: 0 0 12px;
+  color: #292727;
+  font-size: 21px;
+  line-height: 1.35;
+}
+
+.programme-service-card p {
+  min-height: 78px;
+  margin: 0 0 24px;
+  color: #77716e;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.programme-service-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  padding: 9px 14px;
+  border-radius: 30px;
+  background: #f6f3f1;
+  color: #713030;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.programme-service-time i {
+  color: #9b3030;
+}
+
+
+/* ============================================================
+   WEEKLY PROGRAMME
+   ============================================================ */
+
+.programme-weekly {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.weekly-programme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.weekly-programme-card {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 27px;
+  background: #fafafa;
+  border: 1px solid #e7e3e0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease,
+    border-color .3s ease;
+}
+
+.weekly-programme-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  background: #922929;
+  transition: width .3s ease;
+}
+
+.weekly-programme-card:hover {
+  background: #ffffff;
+  border-color: #d9ceca;
+  transform: translateY(-5px);
+  box-shadow: 0 17px 35px rgba(35, 30, 27, .09);
+}
+
+.weekly-programme-card:hover::before {
+  width: 6px;
+}
+
+.weekly-programme-icon {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #f1e8e5;
+  color: #922929;
+  font-size: 19px;
+  transition:
+    background .3s ease,
+    color .3s ease,
+    transform .3s ease;
+}
+
+.weekly-programme-card:hover .weekly-programme-icon {
+  background: #922929;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.weekly-programme-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.weekly-programme-day {
+  display: block;
+  margin-bottom: 5px;
+  color: #922929;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.weekly-programme-card h3 {
+  margin: 0 0 7px;
+  color: #292727;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.weekly-programme-card p {
+  margin: 0;
+  color: #77716e;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.weekly-programme-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 13px;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #f2e9e7;
+  color: #7d2929;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* ============================================================
+   THIRD SUNDAY
+   ============================================================ */
+
+.programme-third-sunday {
+  padding: 85px 0;
+  background: #f7f6f4;
+}
+
+.third-sunday-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 30px;
+  align-items: center;
+  padding: 42px;
+  background: linear-gradient(135deg,
+      #352424,
+      #542c2c);
+  border-radius: 22px;
+  color: #ffffff;
+  box-shadow: 0 18px 45px rgba(50, 30, 30, .16);
+}
+
+.third-sunday-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .1);
+  font-size: 27px;
+}
+
+.third-sunday-content>span {
+  color: #dfb8a0;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 1.7px;
+}
+
+.third-sunday-content h2 {
+  margin: 8px 0 10px;
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.third-sunday-content p {
+  max-width: 650px;
+  margin: 0;
+  color: rgba(255, 255, 255, .75);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.third-sunday-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.third-sunday-items div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 170px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, .06);
+  color: rgba(255, 255, 255, .88);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.third-sunday-items i {
+  color: #dfb8a0;
+}
+
+
+/* ============================================================
+   MINISTRY
+   ============================================================ */
+
+.programme-ministry-section {
+  padding: 105px 0;
+  background: #ffffff;
+}
+
+.ministry-form-wrapper {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #e5dfdc;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 20px 55px rgba(40, 30, 25, .08);
+}
+
+.ministry-form-introduction {
+  padding: 45px 35px;
+  background: #352525;
+  color: #ffffff;
+}
+
+.form-intro-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, .1);
+  color: #dfb8a0;
+  font-size: 22px;
+}
+
+.ministry-form-introduction h3 {
+  margin: 0 0 13px;
+  font-size: 24px;
+}
+
+.ministry-form-introduction>p {
+  margin: 0 0 30px;
+  color: rgba(255, 255, 255, .72);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.form-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-info-list div {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  color: rgba(255, 255, 255, .8);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.form-info-list i {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #dfb8a0;
+}
+
+.ministry-interest-form {
+  padding: 45px;
+  min-width: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.form-field {
+  min-width: 0;
+}
+
+.form-field.full-width {
+  margin-top: 22px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #373331;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.form-field label span {
+  margin-left: 3px;
+  color: #a52e2e;
+}
+
+.input-icon {
+  position: relative;
+}
+
+.input-icon>i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9a918d;
+  pointer-events: none;
+}
+
+.input-icon input,
+.input-icon select,
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd8d5;
+  border-radius: 9px;
+  background: #fafafa;
+  color: #333;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.input-icon input,
+.input-icon select {
+  height: 50px;
+  padding: 0 15px 0 43px;
+}
+
+.form-field textarea {
+  padding: 14px 15px;
+  resize: vertical;
+  min-height: 125px;
+}
+
+.input-icon input:focus,
+.input-icon select:focus,
+.form-field textarea:focus {
+  background: #ffffff;
+  border-color: #a52e2e;
+  box-shadow: 0 0 0 3px rgba(165, 46, 46, .08);
+}
+
+.input-icon select {
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   PHOTO UPLOAD
+   ============================================================ */
+
+.photo-upload-section {
+  margin-top: 30px;
+  padding: 25px;
+  border: 1px solid #e5dfdc;
+  border-radius: 15px;
+  background: #faf9f8;
+}
+
+.photo-upload-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.photo-upload-heading h3 {
+  margin: 0 0 6px;
+  color: #302d2b;
+  font-size: 17px;
+}
+
+.photo-upload-heading p {
+  margin: 0;
+  color: #77716e;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.photo-upload-heading>span {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f2e6e4;
+  color: #922929;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.photo-upload-layout {
+  display: grid;
+  grid-template-columns: 145px 1fr;
+  gap: 22px;
+  align-items: center;
+}
+
+.photo-preview-box {
+  width: 145px;
+  height: 155px;
+  overflow: hidden;
+  border: 1px dashed #cfc6c2;
+  border-radius: 12px;
+  background: #f1efed;
+}
+
+.photo-preview-box img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #aaa29e;
+  font-size: 11px;
+  text-align: center;
+}
+
+.photo-placeholder i {
+  font-size: 30px;
+}
+
+.photo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.photo-action {
+  min-height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: 1px solid #d8d0cc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #5c5551;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+.photo-action:hover {
+  background: #922929;
+  border-color: #922929;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.camera-action {
+  border: 1px solid #d8d0cc;
+}
+
+.remove-photo {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #a52e2e;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   NOTICES / SUBMIT
+   ============================================================ */
+
+.submission-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-radius: 9px;
+  background: #f5f1ef;
+}
+
+.submission-notice i {
+  flex-shrink: 0;
+  color: #922929;
+}
+
+.submission-notice p {
+  margin: 0;
+  color: #706a66;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.programme-submit-btn {
+  width: 100%;
+  min-height: 53px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 9px;
+  background: #922929;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 9px 22px rgba(146, 41, 41, .17);
+  transition:
+    background .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.programme-submit-btn:hover {
+  background: #731f1f;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(146, 41, 41, .24);
+}
+
+.programme-submit-btn:disabled {
+  opacity: .65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.programme-form-error,
+.ministry-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.programme-form-error {
+  background: #fff1f1;
+  color: #8d2929;
+  border: 1px solid #efd1d1;
+}
+
+.ministry-success {
+  background: #eef7f0;
+  color: #2c6738;
+  border: 1px solid #cee3d3;
+}
+
+.ministry-success strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.ministry-success p {
+  margin: 0;
+}
+
+
+/* ============================================================
+   PASTORAL OFFICE
+   ============================================================ */
+
+.programme-office {
+  padding: 85px 0;
+  background: #f7f6f4;
+}
+
+.office-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+  padding: 35px;
+  border: 1px solid #e2dcd8;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(40, 30, 25, .06);
+}
+
+.office-icon {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #f1e8e5;
+  color: #922929;
+  font-size: 23px;
+}
+
+.office-content>span {
+  color: #922929;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+}
+
+.office-content h2 {
+  margin: 7px 0;
+  color: #302d2b;
+  font-size: 24px;
+}
+
+.office-content p {
+  margin: 0;
+  color: #77716d;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.office-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 17px;
+  border-radius: 8px;
+  background: #922929;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+.office-button:hover {
+  background: #731f1f;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+
+/* ============================================================
+   CTA
+   ============================================================ */
+
+.programme-cta {
+  padding: 105px 0;
+  background:
+    linear-gradient(135deg,
+      #302323,
+      #552929);
+  text-align: center;
+}
+
+.programme-cta-content {
+  max-width: 750px;
+  margin: 0 auto;
+  color: #ffffff;
+}
+
+.programme-cta-content>span {
+  color: #dfb8a0;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 2px;
+}
+
+.programme-cta-content h2 {
+  margin: 13px 0;
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.2;
+}
+
+.programme-cta-content p {
+  margin: 0 0 27px;
+  color: rgba(255, 255, 255, .73);
+  font-size: 15px;
+}
+
+.programme-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+
+/* ============================================================
+   CAMERA MODAL
+   ============================================================ */
+
+.camera-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 15, 15, .78);
+  backdrop-filter: blur(7px);
+}
+
+.camera-box {
+  width: min(600px, 100%);
+  overflow: hidden;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, .3);
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 23px;
+  border-bottom: 1px solid #eee;
+}
+
+.camera-header span {
+  color: #922929;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+}
+
+.camera-header h3 {
+  margin: 5px 0 0;
+  color: #302d2b;
+  font-size: 19px;
+}
+
+.camera-header button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #f3efed;
+  color: #555;
+  cursor: pointer;
+  transition:
+    background .25s ease,
+    color .25s ease;
+}
+
+.camera-header button:hover {
+  background: #922929;
+  color: #ffffff;
+}
+
+.camera-preview {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #151515;
+}
+
+.camera-preview video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.camera-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+}
+
+.camera-error {
+  margin: 15px 20px 0;
+  padding: 12px;
+  border-radius: 7px;
+  background: #fff1f1;
+  color: #8d2929;
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .programme-service-grid {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .weekly-programme-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .third-sunday-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .third-sunday-items {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .ministry-form-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .ministry-form-introduction {
+    padding: 35px;
+  }
+
+  .form-info-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .office-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .office-button {
+    grid-column: 2;
+    width: fit-content;
+  }
+}
+
+
+@media (max-width: 760px) {
+
+  .programme-container {
+    width: min(100% - 30px, 650px);
+  }
+
+  .programme-hero {
+    min-height: 520px;
+  }
+
+  .programme-hero-content {
+    padding: 75px 0;
+  }
+
+  .programme-hero h1 {
+    font-size: 42px;
+  }
+
+  .programme-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .choir-slider-wrapper {
+    height: 520px;
+  }
+
+  .choir-slide-content {
+    left: 25px;
+    width: calc(100% - 50px);
+  }
+
+  .choir-slide-content h2 {
+    font-size: 36px;
+  }
+
+  .choir-slide-content p {
+    font-size: 15px;
+  }
+
+  .choir-slider-controls {
+    right: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ministry-interest-form {
+    padding: 28px 22px;
+  }
+
+  .photo-upload-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-preview-box {
+    width: 150px;
+    height: 160px;
+  }
+
+  .third-sunday-card {
+    grid-template-columns: 1fr;
+    padding: 30px;
+  }
+
+  .third-sunday-items {
+    grid-column: auto;
+    flex-direction: column;
+  }
+
+  .office-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .office-icon {
+    margin: 0 auto;
+  }
+
+  .office-button {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .form-info-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 520px) {
+
+  .programme-container {
+    width: calc(100% - 24px);
+  }
+
+  .programme-hero h1 {
+    font-size: 35px;
+  }
+
+  .programme-hero p {
+    font-size: 15px;
+  }
+
+  .programme-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .programme-primary-btn,
+  .programme-secondary-btn {
+    width: 100%;
+  }
+
+  .choir-slider-wrapper {
+    height: 500px;
+  }
+
+  .choir-slide-overlay {
+    background:
+      linear-gradient(180deg,
+        rgba(0, 0, 0, .25),
+        rgba(0, 0, 0, .86));
+  }
+
+  .choir-slide-content {
+    top: auto;
+    bottom: 95px;
+    transform: none;
+  }
+
+  .choir-slide-content h2 {
+    font-size: 31px;
+  }
+
+  .choir-slide-content p {
+    font-size: 14px;
+  }
+
+  .choir-slider-controls {
+    right: 15px;
+    left: 15px;
+    bottom: 20px;
+    justify-content: space-between;
+  }
+
+  .programme-services,
+  .programme-weekly,
+  .programme-ministry-section {
+    padding: 75px 0;
+  }
+
+  .programme-service-card {
+    padding: 30px 24px;
+  }
+
+  .programme-service-card p {
+    min-height: auto;
+  }
+
+  .weekly-programme-card {
+    gap: 14px;
+    padding: 22px 19px;
+  }
+
+  .weekly-programme-icon {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .weekly-programme-card h3 {
+    font-size: 16px;
+  }
+
+  .weekly-programme-card p {
+    font-size: 12px;
+  }
+
+  .photo-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .photo-action {
+    width: 100%;
+  }
+
+  .camera-actions {
+    flex-direction: column;
+  }
+
+  .camera-actions .programme-primary-btn,
+  .camera-actions .programme-secondary-btn {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MINISTRIES LANDING PAGE
+========================================================= */
+
+.ministries-page,
+.music-ministry-page,
+.ministry-detail-page {
+  background: #ffffff;
+  color: #292522;
+}
+
+.ministries-hero {
+  position: relative;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  background:
+    url('/aickibera-church-image.png') center/cover no-repeat;
+}
+
+.ministries-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(25, 20, 18, 0.9),
+      rgba(25, 20, 18, 0.45),
+      rgba(25, 20, 18, 0.25));
+}
+
+.ministries-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  color: #ffffff;
+}
+
+.eyebrow-light {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #e9c8c8;
+}
+
+.ministries-hero h1,
+.music-hero h1,
+.ministry-detail-content h1 {
+  margin: 0 0 20px;
+  font-size: clamp(44px, 7vw, 78px);
+  line-height: 1;
+  font-weight: 850;
+}
+
+.ministries-hero p,
+.music-hero p,
+.ministry-detail-content p {
+  max-width: 720px;
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.8;
+  color: #eeeeee;
+}
+
+.ministries-intro {
+  padding: 105px 0 75px;
+  text-align: center;
+}
+
+.narrow-container {
+  max-width: 820px;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #8f2929;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 2px;
+}
+
+.ministries-intro h2,
+.section-heading-center h2,
+.music-about h2,
+.music-rules h2,
+.ministry-about h2 {
+  margin: 0 0 18px;
+  color: #292522;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.15;
+}
+
+.ministries-intro p,
+.section-heading-center p,
+.music-about p,
+.ministry-about p {
+  color: #746e69;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.ministries-grid-section {
+  padding: 30px 0 105px;
+  background: #f7f5f2;
+}
+
+.ministries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.ministry-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e7e1dc;
+  border-radius: 16px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ministry-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 40px rgba(35, 28, 24, 0.1);
+}
+
+.ministry-card-image {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+}
+
+.ministry-card-image>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.ministry-card:hover .ministry-card-image>img {
+  transform: scale(1.05);
+}
+
+.image-watermark {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 80px;
+  opacity: 0.55;
+}
+
+.image-watermark img {
+  width: 100%;
+  height: auto;
+}
+
+.ministry-icon {
+  position: absolute;
+  left: 20px;
+  bottom: -25px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #8f2929;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ministry-card-content {
+  padding: 45px 24px 28px;
+}
+
+.ministry-card-content>span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #a09a95;
+}
+
+.ministry-card-content h3 {
+  margin: 8px 0 12px;
+  font-size: 21px;
+}
+
+.ministry-card-content p {
+  min-height: 95px;
+  margin-bottom: 22px;
+  color: #746e69;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.ministry-card-link,
+.music-team-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #8f2929;
+  text-decoration: none;
+  font-weight: 750;
+  font-size: 14px;
+}
+
+.ministry-card-link i,
+.music-team-card a i {
+  transition: transform 0.25s ease;
+}
+
+.ministry-card-link:hover i,
+.music-team-card a:hover i {
+  transform: translateX(5px);
+}
+
+.ministries-cta {
+  padding: 85px 0;
+}
+
+.ministries-cta-box,
+.join-music-box,
+.ministry-join-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 35px;
+  padding: 50px;
+  background: #302a27;
+  color: #ffffff;
+  border-radius: 18px;
+}
+
+.ministries-cta h2,
+.join-music-box h2,
+.ministry-join-box h2 {
+  margin: 0 0 10px;
+  font-size: 34px;
+}
+
+.ministries-cta p,
+.join-music-box p,
+.ministry-join-box p {
+  margin: 0;
+  color: #d6d0cc;
+  line-height: 1.7;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #b71c1c;
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 750;
+  white-space: nowrap;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: #941717;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MUSIC MINISTRY HERO
+========================================================= */
+
+.music-hero {
+  position: relative;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  background:
+    url('/ambassadors-choir.png') center/cover no-repeat;
+}
+
+.music-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(20, 16, 14, 0.92),
+      rgba(20, 16, 14, 0.58),
+      rgba(20, 16, 14, 0.25));
+}
+
+.music-hero-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.music-hero-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.music-btn-primary,
+.music-btn-outline {
+  display: inline-flex;
+  padding: 14px 24px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 750;
+}
+
+.music-btn-primary {
+  background: #b71c1c;
+  color: #ffffff;
+}
+
+.music-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #ffffff;
+}
+
+.music-about {
+  padding: 110px 0;
+}
+
+.music-two-column {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.music-scripture-card {
+  padding: 45px;
+  background: #f6f1ed;
+  border-left: 4px solid #8f2929;
+}
+
+.music-scripture-card i {
+  color: #8f2929;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.music-scripture-card blockquote {
+  margin: 0 0 15px;
+  color: #302a27;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.music-scripture-card span {
+  color: #8f2929;
+  font-weight: 750;
+}
+
+.music-purpose {
+  padding: 90px 0;
+  background: #f7f5f2;
+}
+
+.purpose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.purpose-card {
+  padding: 35px;
+  background: #ffffff;
+  border: 1px solid #e7e1dc;
+  border-radius: 14px;
+}
+
+.purpose-card i {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  background: #f3e9e5;
+  color: #8f2929;
+  border-radius: 10px;
+}
+
+.purpose-card h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+}
+
+.purpose-card p {
+  margin: 0;
+  color: #746e69;
+  line-height: 1.75;
+}
+
+.music-objectives,
+.music-teams,
+.music-programme,
+.music-leadership,
+.music-memories,
+.music-reels,
+.music-rules,
+.join-music {
+  padding: 105px 0;
+}
+
+.section-heading-center {
+  max-width: 800px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.objective-item {
+  padding: 25px;
+  border: 1px solid #e7e1dc;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.objective-item span {
+  display: block;
+  margin-bottom: 18px;
+  color: #bdb4ae;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.objective-item p {
+  margin: 0;
+  color: #57514d;
+  line-height: 1.65;
+}
+
+.music-teams {
+  background: #f7f5f2;
+}
+
+.music-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.music-team-card {
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #e6e0db;
+}
+
+.music-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.music-image-wrap>img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-team-card .music-image-wrap {
+  height: 280px;
+}
+
+.music-team-card>div:last-child {
+  padding: 28px;
+}
+
+.music-team-card span {
+  color: #8f2929;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+}
+
+.music-team-card h3 {
+  margin: 8px 0 10px;
+  font-size: 23px;
+}
+
+.music-team-card p {
+  color: #746e69;
+  line-height: 1.7;
+}
+
+.music-watermark {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 85px;
+  opacity: 0.55;
+}
+
+.music-watermark img {
+  width: 100%;
+}
+
+.music-schedule {
+  max-width: 900px;
+  margin: auto;
+  border-top: 1px solid #ded8d2;
+}
+
+.music-schedule>div {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 30px;
+  padding: 23px 0;
+  border-bottom: 1px solid #ded8d2;
+}
+
+.music-schedule span {
+  color: #8f2929;
+  font-weight: 800;
+}
+
+.music-schedule strong {
+  color: #38322e;
+}
+
+.song-of-year {
+  padding: 110px 0;
+  background: #f7f5f2;
+}
+
+.songs-year-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.song-year-card {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e5dfda;
+  border-radius: 16px;
+}
+
+.song-year-media {
+  position: relative;
+  height: 310px;
+}
+
+.song-year-media .music-image-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.song-play-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  background: rgba(183, 28, 28, 0.92);
+  color: #ffffff;
+  border-radius: 50%;
+}
+
+.song-year-content {
+  padding: 32px;
+}
+
+.song-year-content h3 {
+  margin: 0 0 8px;
+  font-size: 27px;
+}
+
+.song-year-content h4 {
+  margin: 0 0 15px;
+  color: #8f2929;
+}
+
+.song-year-content p {
+  color: #746e69;
+  line-height: 1.7;
+}
+
+.song-video {
+  margin-top: 25px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: #111;
+}
+
+.song-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.youtube-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 18px;
+  background: #b71c1c;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.leadership-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.leader-placeholder {
+  text-align: center;
+}
+
+.leader-photo {
+  position: relative;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  overflow: hidden;
+  background: #eee9e5;
+  border-radius: 12px;
+  color: #b5aca6;
+  font-size: 45px;
+}
+
+.leader-watermark {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  color: rgba(143, 41, 41, 0.4);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.leader-placeholder>span {
+  color: #8f2929;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.leader-placeholder h3 {
+  margin-top: 7px;
+  font-size: 15px;
+}
+
+.music-memories {
+  background: #f7f5f2;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.memory-card {
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 14px;
+}
+
+.memory-card .music-image-wrap {
+  height: 280px;
+}
+
+.memory-content {
+  padding: 25px;
+}
+
+.memory-content h3 {
+  margin: 0 0 8px;
+}
+
+.memory-content p {
+  margin: 0;
+  color: #746e69;
+  line-height: 1.6;
+}
+
+.reels-placeholder-grid,
+.video-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.reel-placeholder,
+.video-placeholder {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #cfc6bf;
+  background: #f8f6f4;
+  border-radius: 14px;
+}
+
+.reel-placeholder i,
+.video-placeholder i {
+  margin-bottom: 18px;
+  font-size: 42px;
+  color: #8f2929;
+}
+
+.reel-placeholder h3 {
+  margin: 0 0 5px;
+}
+
+.reel-placeholder p {
+  margin: 0;
+  color: #8b837d;
+}
+
+.music-rules {
+  background: #f7f5f2;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rule-row {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid #e8e1dc;
+  border-radius: 10px;
+}
+
+.rule-row span {
+  flex-shrink: 0;
+  width: 27px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1e7e2;
+  color: #8f2929;
+  border-radius: 50%;
+}
+
+.rule-row p {
+  margin: 3px 0 0;
+  color: #625c57;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   GENERIC MINISTRY DETAIL
+========================================================= */
+
+.ministry-detail-hero {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ministry-detail-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+}
+
+.ministry-detail-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(25, 20, 18, 0.92),
+      rgba(25, 20, 18, 0.55),
+      rgba(25, 20, 18, 0.25));
+}
+
+.ministry-detail-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.ministry-detail-icon {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  background: #b71c1c;
+  border-radius: 13px;
+  font-size: 23px;
+}
+
+.ministry-about {
+  padding: 105px 0;
+}
+
+.ministry-two-column {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.ministry-quote-box {
+  padding: 45px;
+  background: #f6f1ed;
+  border-left: 4px solid #8f2929;
+}
+
+.ministry-quote-box i {
+  margin-bottom: 20px;
+  color: #8f2929;
+  font-size: 28px;
+}
+
+.ministry-quote-box p {
+  margin: 0;
+  color: #38322e;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.ministry-purpose {
+  padding: 90px 0;
+  background: #f7f5f2;
+}
+
+.ministry-purpose-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.ministry-purpose-grid>div {
+  padding: 35px;
+  background: #ffffff;
+  border: 1px solid #e7e1dc;
+  border-radius: 14px;
+}
+
+.ministry-purpose-grid i {
+  color: #8f2929;
+  font-size: 22px;
+  margin-bottom: 22px;
+}
+
+.ministry-purpose-grid span {
+  display: block;
+  margin-bottom: 7px;
+  color: #a29a94;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.5px;
+}
+
+.ministry-purpose-grid h3 {
+  margin: 0 0 12px;
+}
+
+.ministry-purpose-grid p {
+  margin: 0;
+  color: #746e69;
+  line-height: 1.7;
+}
+
+.ministry-activities {
+  padding: 105px 0;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.activity-card {
+  position: relative;
+  padding: 32px;
+  border: 1px solid #e5dfda;
+  border-radius: 13px;
+}
+
+.activity-card>span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #d2cac4;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.activity-card i {
+  color: #8f2929;
+}
+
+.activity-card h3 {
+  margin: 20px 0 0;
+  font-size: 18px;
+}
+
+.ministry-leadership {
+  padding: 105px 0;
+  background: #f7f5f2;
+}
+
+.generic-leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.generic-leader-card {
+  padding: 18px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 13px;
+}
+
+.generic-leader-photo {
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  background: #ece7e3;
+  color: #aaa19b;
+  font-size: 45px;
+  border-radius: 10px;
+}
+
+.generic-leader-card span {
+  color: #8f2929;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1px;
+}
+
+.generic-leader-card h3 {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.ministry-gallery {
+  padding: 105px 0;
+}
+
+.generic-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.gallery-placeholder {
+  position: relative;
+  height: 310px;
+  overflow: hidden;
+  border-radius: 13px;
+}
+
+.gallery-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-watermark {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #8f2929;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 25px;
+  background: linear-gradient(transparent,
+      rgba(0, 0, 0, 0.72));
+  color: #ffffff;
+}
+
+.ministry-video {
+  padding: 105px 0;
+  background: #f7f5f2;
+}
+
+.video-placeholder {
+  width: 100%;
+  cursor: pointer;
+  border: 1px dashed #cfc6bf;
+  color: #403a36;
+}
+
+.video-placeholder span {
+  font-weight: 700;
+}
+
+.ministry-rules {
+  padding: 105px 0;
+}
+
+.rules-grid {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.standard-rule {
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid #e5dfda;
+  border-radius: 10px;
+}
+
+.standard-rule>span {
+  color: #c5bbb4;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.standard-rule i {
+  color: #8f2929;
+}
+
+.standard-rule p {
+  margin: 0;
+  color: #625c57;
+  line-height: 1.55;
+}
+
+.ministry-join {
+  padding: 90px 0;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .ministries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .leadership-placeholder-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .objectives-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 850px) {
+
+  .music-two-column,
+  .ministry-two-column {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .purpose-grid,
+  .music-team-grid,
+  .songs-year-grid,
+  .ministry-purpose-grid,
+  .activities-grid,
+  .generic-gallery-grid,
+  .memory-grid,
+  .reels-placeholder-grid,
+  .video-placeholder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .generic-leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ministries-cta-box,
+  .join-music-box,
+  .ministry-join-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .ministries-hero,
+  .music-hero,
+  .ministry-detail-hero {
+    min-height: 500px;
+  }
+
+  .ministries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .objectives-grid,
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .leadership-placeholder-grid,
+  .generic-leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .music-schedule>div {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .ministries-cta-box,
+  .join-music-box,
+  .ministry-join-box {
+    padding: 32px 25px;
+  }
+
+  .music-about,
+  .music-objectives,
+  .music-teams,
+  .music-programme,
+  .music-leadership,
+  .music-memories,
+  .music-reels,
+  .music-rules,
+  .join-music,
+  .ministry-about,
+  .ministry-activities,
+  .ministry-leadership,
+  .ministry-gallery,
+  .ministry-video,
+  .ministry-rules {
+    padding: 75px 0;
+  }
+
+}
+```css
+/* =========================================================
+   A.I.C. KIBERA — MINISTRIES PAGE
+   ========================================================= */
+
+.ministries-page {
+  background: #f5f7fb;
+  color: #172033;
+  overflow: hidden;
+}
+
+.ministries-container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.ministries-hero {
+  min-height: 520px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    linear-gradient(135deg,
+      rgba(8, 20, 48, 0.95),
+      rgba(113, 28, 52, 0.82)),
+    url('/aickibera-church-image.png') center/cover;
+  overflow: hidden;
+}
+
+.ministries-hero::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  top: -160px;
+  right: -100px;
+  animation: ministryFloat 8s ease-in-out infinite;
+}
+
+.ministries-hero::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  bottom: -120px;
+  left: -70px;
+  animation: ministryFloatReverse 10s ease-in-out infinite;
+}
+
+.ministries-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center,
+      transparent,
+      rgba(0, 0, 0, 0.28));
+}
+
+.ministries-hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(850px, 90%);
+  color: #ffffff;
+  animation: ministryHeroReveal 1s ease both;
+}
+
+.ministries-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(10px);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.ministries-hero h1 {
+  margin: 22px 0 12px;
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.ministries-hero h1 span {
+  color: #f3c969;
+}
+
+.ministries-hero-content>p {
+  font-size: clamp(18px, 3vw, 25px);
+  margin: 0;
+  font-weight: 500;
+}
+
+.ministries-hero-line {
+  width: 80px;
+  height: 4px;
+  border-radius: 10px;
+  background: #f3c969;
+  margin: 25px auto;
+}
+
+.ministries-hero-small {
+  max-width: 700px;
+  margin: auto !important;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 16px !important;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.ministries-introduction {
+  padding: 90px 0 70px;
+  background: #ffffff;
+}
+
+.ministries-section-heading {
+  max-width: 800px;
+}
+
+.ministries-section-heading.centered {
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.ministries-section-heading>span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #b71c1c;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+}
+
+.ministries-section-heading h2 {
+  margin: 14px 0;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.15;
+  color: #18243a;
+}
+
+.ministries-section-heading h2 strong {
+  color: #b71c1c;
+}
+
+.ministries-section-heading p {
+  color: #657084;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.ministries-feature-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 45px;
+}
+
+.ministries-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 25px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #f8fafc, #eef2f7);
+  border: 1px solid #e5eaf1;
+  box-shadow: 0 12px 30px rgba(20, 34, 58, 0.07);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.ministries-feature:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 40px rgba(20, 34, 58, 0.13);
+}
+
+.feature-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: #b71c1c;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.ministries-feature h3 {
+  margin: 0 0 6px;
+  color: #18243a;
+  font-size: 18px;
+}
+
+.ministries-feature p {
+  margin: 0;
+  color: #6d7788;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DIRECTORY
+   ========================================================= */
+
+.ministries-directory {
+  padding: 95px 0;
+  background:
+    radial-gradient(circle at top left,
+      rgba(183, 28, 28, 0.05),
+      transparent 35%),
+    #f5f7fb;
+}
+
+.ministries-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+
+/* =========================================================
+   BASE MINISTRY CARD
+   ========================================================= */
+
+.ministry-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 14px 35px rgba(24, 36, 58, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  animation: ministryCardReveal 0.75s ease forwards;
+  animation-delay: var(--animation-delay);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.ministry-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 55px rgba(24, 36, 58, 0.18);
+}
+
+.ministry-card-image {
+  height: 215px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ministry-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.ministry-card:hover .ministry-card-image img {
+  transform: scale(1.08);
+}
+
+.ministry-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.65));
+}
+
+.ministry-card-icon {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.17);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+}
+
+.ministry-card-label {
+  position: absolute;
+  right: 18px;
+  bottom: 22px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ministry-card-content {
+  padding: 25px;
+}
+
+.ministry-card-content h3 {
+  margin: 0 0 11px;
+  font-size: 22px;
+  color: #18243a;
+}
+
+.ministry-card-content p {
+  margin: 0 0 22px;
+  color: #697386;
+  font-size: 14px;
+  line-height: 1.75;
+  min-height: 98px;
+}
+
+.ministry-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: #18243a;
+  transition:
+    gap 0.3s ease,
+    color 0.3s ease;
+}
+
+.ministry-explore:hover {
+  gap: 14px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL MINISTRY COLORS
+   ========================================================= */
+
+/* MUSIC */
+.music-card {
+  background: linear-gradient(145deg,
+      #fffdf5,
+      #f5f0df);
+  border-top: 5px solid #c39a3a;
+}
+
+.music-card .ministry-card-icon {
+  background: rgba(123, 89, 12, 0.75);
+}
+
+.music-card .ministry-card-label {
+  background: rgba(123, 89, 12, 0.72);
+}
+
+.music-card .ministry-explore {
+  color: #8a6817;
+}
+
+
+/* WOMEN */
+.women-card {
+  background: linear-gradient(145deg,
+      #fff7fa,
+      #f8e8ee);
+  border-top: 5px solid #9d3b5b;
+}
+
+.women-card .ministry-card-icon {
+  background: rgba(157, 59, 91, 0.78);
+}
+
+.women-card .ministry-card-label {
+  background: rgba(157, 59, 91, 0.72);
+}
+
+.women-card .ministry-explore {
+  color: #9d3b5b;
+}
+
+
+/* MEN */
+.men-card {
+  background: linear-gradient(145deg,
+      #f4f9ff,
+      #e4edf7);
+  border-top: 5px solid #1d4e89;
+}
+
+.men-card .ministry-card-icon {
+  background: rgba(29, 78, 137, 0.8);
+}
+
+.men-card .ministry-card-label {
+  background: rgba(29, 78, 137, 0.72);
+}
+
+.men-card .ministry-explore {
+  color: #1d4e89;
+}
+
+
+/* YOUTH */
+.youth-card {
+  background: linear-gradient(145deg,
+      #faf7ff,
+      #ece5fa);
+  border-top: 5px solid #7046a8;
+}
+
+.youth-card .ministry-card-icon {
+  background: rgba(112, 70, 168, 0.8);
+}
+
+.youth-card .ministry-card-label {
+  background: rgba(112, 70, 168, 0.72);
+}
+
+.youth-card .ministry-explore {
+  color: #7046a8;
+}
+
+
+/* CHILDREN */
+.children-card {
+  background: linear-gradient(145deg,
+      #f2fbff,
+      #e0f3fa);
+  border-top: 5px solid #1686b2;
+}
+
+.children-card .ministry-card-icon {
+  background: rgba(22, 134, 178, 0.8);
+}
+
+.children-card .ministry-card-label {
+  background: rgba(22, 134, 178, 0.72);
+}
+
+.children-card .ministry-explore {
+  color: #1686b2;
+}
+
+
+/* MEDIA */
+.media-card {
+  background: linear-gradient(145deg,
+      #f3f8f9,
+      #e0ebed);
+  border-top: 5px solid #176b76;
+}
+
+.media-card .ministry-card-icon {
+  background: rgba(23, 107, 118, 0.82);
+}
+
+.media-card .ministry-card-label {
+  background: rgba(23, 107, 118, 0.72);
+}
+
+.media-card .ministry-explore {
+  color: #176b76;
+}
+
+
+/* PROJECTION */
+.projection-card {
+  background: linear-gradient(145deg,
+      #f7f5ff,
+      #e8e4fa);
+  border-top: 5px solid #5145a6;
+}
+
+.projection-card .ministry-card-icon {
+  background: rgba(81, 69, 166, 0.82);
+}
+
+.projection-card .ministry-card-label {
+  background: rgba(81, 69, 166, 0.72);
+}
+
+.projection-card .ministry-explore {
+  color: #5145a6;
+}
+
+
+/* EVANGELISM */
+.evangelism-card {
+  background: linear-gradient(145deg,
+      #f3fbf5,
+      #e0f1e4);
+  border-top: 5px solid #217a42;
+}
+
+.evangelism-card .ministry-card-icon {
+  background: rgba(33, 122, 66, 0.82);
+}
+
+.evangelism-card .ministry-card-label {
+  background: rgba(33, 122, 66, 0.72);
+}
+
+.evangelism-card .ministry-explore {
+  color: #217a42;
+}
+
+
+/* =========================================================
+   MUSIC FEATURE
+   ========================================================= */
+
+.music-ministry-feature {
+  padding: 90px 0;
+  background: #101b2d;
+  color: #ffffff;
+}
+
+.music-feature-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.music-feature-image {
+  height: 470px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.music-feature-image::after {
+  content: "A.I.C. KIBERA";
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  backdrop-filter: blur(8px);
+}
+
+.music-feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-feature-badge {
+  position: absolute;
+  z-index: 2;
+  top: 22px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  background: rgba(195, 154, 58, 0.92);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.music-feature-content>span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #f3c969;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.music-feature-content h2 {
+  margin: 17px 0;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.15;
+}
+
+.music-feature-content h2 strong {
+  color: #f3c969;
+  display: block;
+}
+
+.music-feature-content p {
+  color: #b8c1cf;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.music-feature-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px 23px;
+  border-radius: 8px;
+  background: #c39a3a;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.music-feature-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(195, 154, 58, 0.25);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.ministries-cta {
+  position: relative;
+  padding: 95px 0;
+  text-align: center;
+  background:
+    linear-gradient(135deg,
+      rgba(183, 28, 28, 0.94),
+      rgba(92, 18, 31, 0.95)),
+    url('/aickibera-church-image.png') center/cover;
+  color: #ffffff;
+}
+
+.ministries-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center,
+      transparent,
+      rgba(0, 0, 0, 0.22));
+}
+
+.ministries-cta-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: auto;
+}
+
+.ministries-cta-content>span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.ministries-cta h2 {
+  margin: 18px 0 12px;
+  font-size: clamp(34px, 5vw, 52px);
+}
+
+.ministries-cta p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.8;
+}
+
+.ministries-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 15px 27px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #9d1d2c;
+  text-decoration: none;
+  font-weight: 900;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ministries-cta-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes ministryHeroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ministryCardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ministryFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes ministryFloatReverse {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .ministries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ministries-feature-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 850px) {
+  .music-feature-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .music-feature-image {
+    height: 360px;
+  }
+}
+
+@media (max-width: 650px) {
+  .ministries-hero {
+    min-height: 470px;
+  }
+
+  .ministries-hero h1 {
+    letter-spacing: -1px;
+  }
+
+  .ministries-introduction,
+  .ministries-directory,
+  .music-ministry-feature,
+  .ministries-cta {
+    padding: 65px 0;
+  }
+
+  .ministries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ministry-card-image {
+    height: 230px;
+  }
+
+  .ministries-feature {
+    padding: 20px;
+  }
+
+  .music-feature-image {
+    height: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .ministries-page *,
+  .ministries-page *::before,
+  .ministries-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+```css
+/* =========================================================
+   A.I.C. KIBERA MINISTRIES
+   AUTO SLIDING + PROFESSIONAL ANIMATIONS
+   ========================================================= */
+
+.ministries-page {
+  width: 100%;
+  overflow: hidden;
+  background: #f4f7fb;
+  color: #172033;
+}
+
+.ministries-container {
+  width: min(1200px, 92%);
+  margin: auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.ministries-main-hero {
+  min-height: 540px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(135deg,
+      rgba(12, 27, 55, 0.94),
+      rgba(120, 26, 43, 0.82)),
+    url('/aickibera-church-image.png');
+
+  background-size: cover;
+  background-position: center;
+
+  overflow: hidden;
+}
+
+.ministries-main-hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  top: -180px;
+  right: -100px;
+
+  animation: ministryOrb 8s ease-in-out infinite;
+}
+
+.ministries-main-hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  bottom: -140px;
+  left: -80px;
+
+  animation: ministryOrbReverse 10s ease-in-out infinite;
+}
+
+.ministries-main-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at center,
+      transparent,
+      rgba(0, 0, 0, 0.28));
+}
+
+.ministries-main-hero-content {
+  position: relative;
+  z-index: 2;
+
+  color: white;
+
+  width: min(850px, 90%);
+
+  animation: ministryHeroEnter 1.2s ease forwards;
+}
+
+.ministries-kicker {
+  display: inline-block;
+
+  padding: 9px 18px;
+
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(10px);
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.ministries-main-hero h1 {
+  margin: 22px 0 12px;
+
+  font-size: clamp(44px, 7vw, 78px);
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  letter-spacing: -2px;
+}
+
+.ministries-hero-divider {
+  width: 90px;
+  height: 4px;
+
+  margin: 25px auto;
+
+  border-radius: 20px;
+
+  background: #e7c568;
+}
+
+.ministries-main-hero p {
+  margin: 0;
+
+  font-size: clamp(17px, 3vw, 24px);
+
+  color: rgba(255, 255, 255, 0.88);
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.ministries-intro-section {
+  padding: 90px 0;
+
+  background: white;
+}
+
+.ministries-intro-content {
+  max-width: 800px;
+  margin-bottom: 45px;
+}
+
+.section-mini-title {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #b71c1c;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+.ministries-intro-content h2 {
+  margin: 14px 0;
+
+  font-size: clamp(32px, 5vw, 50px);
+
+  color: #18243a;
+}
+
+.ministries-intro-content h2 span {
+  color: #b71c1c;
+}
+
+.ministries-intro-content p {
+  color: #687386;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+.ministries-values {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+.ministry-value-box {
+  padding: 30px;
+
+  border-radius: 20px;
+
+  background: linear-gradient(145deg,
+      #f8fafc,
+      #edf2f7);
+
+  border: 1px solid #e2e8f0;
+
+  box-shadow:
+    0 12px 35px rgba(20, 35, 60, 0.08);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.ministry-value-box:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 22px 45px rgba(20, 35, 60, 0.14);
+}
+
+.ministry-value-box>i {
+  width: 55px;
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: #b71c1c;
+
+  color: white;
+
+  font-size: 20px;
+
+  margin-bottom: 18px;
+}
+
+.ministry-value-box h3 {
+  margin: 0 0 8px;
+
+  color: #18243a;
+}
+
+.ministry-value-box p {
+  margin: 0;
+
+  color: #6d7788;
+
+  line-height: 1.65;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   DIRECTORY
+   ========================================================= */
+
+.ministries-directory-section {
+  padding: 100px 0;
+
+  background:
+    radial-gradient(circle at top left,
+      rgba(183, 28, 28, 0.06),
+      transparent 35%),
+    #f4f7fb;
+}
+
+.ministries-heading {
+  max-width: 750px;
+
+  text-align: center;
+
+  margin: 0 auto 55px;
+}
+
+.ministries-heading span {
+  color: #b71c1c;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.ministries-heading h2 {
+  margin: 14px 0;
+
+  font-size: clamp(32px, 5vw, 48px);
+
+  color: #18243a;
+}
+
+.ministries-heading p {
+  color: #697386;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.ministries-card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 25px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.professional-ministry-card {
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: white;
+
+  box-shadow:
+    0 14px 35px rgba(20, 35, 60, 0.10);
+
+  border-top: 5px solid transparent;
+
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  animation:
+    ministryCardEnter 0.8s ease forwards;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.professional-ministry-card:hover {
+  transform: translateY(-11px);
+
+  box-shadow:
+    0 25px 55px rgba(20, 35, 60, 0.18);
+}
+
+
+/* =========================================================
+   DIFFERENT MINISTRY COLORS
+   ========================================================= */
+
+.music-ministry-card {
+  border-top-color: #c39a3a;
+
+  background:
+    linear-gradient(145deg,
+      #fffdf6,
+      #f4eddb);
+}
+
+.women-ministry-card {
+  border-top-color: #9d3b5b;
+
+  background:
+    linear-gradient(145deg,
+      #fff7fa,
+      #f7e8ee);
+}
+
+.men-ministry-card {
+  border-top-color: #24548b;
+
+  background:
+    linear-gradient(145deg,
+      #f5faff,
+      #e5eef8);
+}
+
+.youth-ministry-card {
+  border-top-color: #7046a8;
+
+  background:
+    linear-gradient(145deg,
+      #fbf8ff,
+      #eee7f9);
+}
+
+.children-ministry-card {
+  border-top-color: #1686b2;
+
+  background:
+    linear-gradient(145deg,
+      #f3fcff,
+      #e2f4fa);
+}
+
+.media-ministry-card {
+  border-top-color: #16727d;
+
+  background:
+    linear-gradient(145deg,
+      #f3fafb,
+      #e1eeee);
+}
+
+.projection-ministry-card {
+  border-top-color: #5145a6;
+
+  background:
+    linear-gradient(145deg,
+      #f8f7ff,
+      #e9e6f9);
+}
+
+.evangelism-ministry-card {
+  border-top-color: #247742;
+
+  background:
+    linear-gradient(145deg,
+      #f3fbf5,
+      #e1f1e5);
+}
+
+
+/* =========================================================
+   AUTO SLIDER
+   ========================================================= */
+
+.ministry-card-slider {
+  position: relative;
+
+  height: 235px;
+
+  overflow: hidden;
+
+  background: #172033;
+}
+
+.ministry-slide-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0;
+
+  transform: scale(1.06);
+
+  transition:
+    opacity 1.2s ease,
+    transform 5s ease;
+
+  display: block;
+}
+
+.ministry-slide-image.active {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.ministry-slider-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+    linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.62));
+}
+
+.aic-image-watermark {
+  position: absolute;
+
+  z-index: 4;
+
+  left: 18px;
+  bottom: 17px;
+
+  padding: 7px 11px;
+
+  border-radius: 7px;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+
+  backdrop-filter: blur(7px);
+}
+
+.ministry-slider-dots {
+  position: absolute;
+
+  z-index: 5;
+
+  right: 18px;
+  bottom: 20px;
+
+  display: flex;
+
+  gap: 6px;
+}
+
+.slider-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.5);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+.slider-dot.active {
+  background: white;
+
+  transform: scale(1.35);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.professional-ministry-content {
+  position: relative;
+
+  padding: 25px;
+}
+
+.professional-ministry-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: -50px;
+
+  position: relative;
+  z-index: 7;
+
+  border-radius: 15px;
+
+  color: white;
+
+  background: #b71c1c;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.music-ministry-card .professional-ministry-icon {
+  background: #a27b20;
+}
+
+.women-ministry-card .professional-ministry-icon {
+  background: #9d3b5b;
+}
+
+.men-ministry-card .professional-ministry-icon {
+  background: #24548b;
+}
+
+.youth-ministry-card .professional-ministry-icon {
+  background: #7046a8;
+}
+
+.children-ministry-card .professional-ministry-icon {
+  background: #1686b2;
+}
+
+.media-ministry-card .professional-ministry-icon {
+  background: #16727d;
+}
+
+.projection-ministry-card .professional-ministry-icon {
+  background: #5145a6;
+}
+
+.evangelism-ministry-card .professional-ministry-icon {
+  background: #247742;
+}
+
+.professional-ministry-label {
+  display: block;
+
+  margin-top: 17px;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1.2px;
+
+  color: #8a93a2;
+}
+
+.professional-ministry-content h3 {
+  margin: 7px 0 10px;
+
+  font-size: 22px;
+
+  color: #18243a;
+}
+
+.professional-ministry-content p {
+  min-height: 88px;
+
+  margin: 0 0 20px;
+
+  color: #687386;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+.ministry-view-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #18243a;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  transition:
+    gap 0.3s ease;
+}
+
+.ministry-view-button:hover {
+  gap: 15px;
+}
+
+
+/* =========================================================
+   MUSIC FEATURE
+   ========================================================= */
+
+.ministries-music-highlight {
+  padding: 100px 0;
+
+  background: #101b2d;
+
+  color: white;
+}
+
+.music-highlight-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 60px;
+
+  align-items: center;
+}
+
+.music-highlight-image {
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.music-highlight-image .ministry-card-slider {
+  height: 480px;
+}
+
+.music-highlight-content>span {
+  color: #e7c568;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+}
+
+.music-highlight-content h2 {
+  margin: 17px 0;
+
+  font-size: clamp(32px, 5vw, 50px);
+
+  line-height: 1.15;
+}
+
+.music-highlight-content h2 strong {
+  display: block;
+
+  color: #e7c568;
+}
+
+.music-highlight-content p {
+  color: #b8c1cf;
+
+  line-height: 1.8;
+}
+
+.music-highlight-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+  padding: 14px 22px;
+
+  border-radius: 8px;
+
+  background: #c39a3a;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 900;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.music-highlight-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 30px rgba(195, 154, 58, 0.28);
+}
+
+
+/* =========================================================
+   BOTTOM CTA
+   ========================================================= */
+
+.ministries-bottom-cta {
+  padding: 100px 0;
+
+  background:
+    linear-gradient(135deg,
+      rgba(183, 28, 28, 0.95),
+      rgba(95, 17, 31, 0.95)),
+    url('/aickibera-church-image.png') center/cover;
+
+  color: white;
+
+  text-align: center;
+}
+
+.ministries-bottom-content {
+  max-width: 760px;
+
+  margin: auto;
+}
+
+.ministries-bottom-content>span {
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+.ministries-bottom-content h2 {
+  margin: 17px 0;
+
+  font-size: clamp(34px, 5vw, 54px);
+}
+
+.ministries-bottom-content p {
+  color: rgba(255, 255, 255, 0.86);
+
+  line-height: 1.8;
+}
+
+.ministries-bottom-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 25px;
+
+  padding: 15px 25px;
+
+  border-radius: 8px;
+
+  background: white;
+
+  color: #a61e2d;
+
+  text-decoration: none;
+
+  font-weight: 900;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ministries-bottom-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes ministryHeroEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+@keyframes ministryCardEnter {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+@keyframes ministryOrb {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(25px);
+  }
+
+}
+
+@keyframes ministryOrbReverse {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-20px);
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .ministries-card-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .ministries-values {
+    grid-template-columns:
+      1fr;
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .music-highlight-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .music-highlight-image .ministry-card-slider {
+    height: 360px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .ministries-card-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .ministries-main-hero {
+    min-height: 470px;
+  }
+
+  .ministries-intro-section,
+  .ministries-directory-section,
+  .ministries-music-highlight,
+  .ministries-bottom-cta {
+    padding: 65px 0;
+  }
+
+  .ministry-card-slider {
+    height: 240px;
+  }
+
+  .professional-ministry-content p {
+    min-height: auto;
+  }
+
+}
+
