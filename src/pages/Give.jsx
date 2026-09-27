@@ -14,7 +14,7 @@ export default function Give() {
     const handleWhatsAppConfirm = (e) => {
         e.preventDefault();
         const accountType = selectedCategory === 'Other' ? (customCategory || 'Donation') : selectedCategory;
-        const reverendPhone = "254725436394;
+        const reverendPhone = "254725436394";
         
         const message = encodeURIComponent(
             ` Shalom AIC Kibera Finance Office,\n\n` +
