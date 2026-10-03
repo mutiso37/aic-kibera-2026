@@ -145,7 +145,7 @@ return (
                                     marginBottom: "15px"
                                 }}
                             >
-                                Africa Inland Church – Kenya, Kibera is a
+                                Kibera Local Church is a
                                 Christian community committed to proclaiming
                                 the Gospel of Jesus Christ, nurturing
                                 believers in faith, serving our community
@@ -161,7 +161,7 @@ return (
                                     margin: 0
                                 }}
                             >
-                                We are part of the Africa Inland Church
+                                We are part of the Africa Inland Church - Kenya (A.I.C.)
                                 family, with a strong heritage of faith,
                                 service and mission.
                             </p>
@@ -261,7 +261,7 @@ return (
                                             fontWeight: "600"
                                         }}
                                     >
-                                        Africa Inland Church (A.I.C.)
+                                        Africa Inland Church - Kenya (A.I.C.)
                                     </div>
                                 </div>
                             </div>
@@ -820,7 +820,7 @@ return (
                         >
                             <img
                                 src="/leader-rev.png"
-                                alt="Rev. John N. Mwangi"
+                                alt="Rev. Fredrick Kiema"
                                 style={{
                                     width: "65px",
                                     height: "65px",
@@ -841,7 +841,7 @@ return (
                                         fontWeight: "bold"
                                     }}
                                 >
-                                    Rev. John N. Mwangi
+                                    Rev. Fredrick kiema
                                 </div>
 
                                 <div
@@ -886,7 +886,7 @@ return (
                                     letterSpacing: "0.5px"
                                 }}
                             >
-                                Pastoral Team
+                            Associate Pastors
                             </div>
 
                             <div
@@ -899,22 +899,22 @@ return (
                             >
                                 {[
                                     {
-                                        name: "Pastor Josephine K",
-                                        role: "Assistant Pastor",
-                                        img: "/leader-josephine.png",
-                                        fallback: "Asst. Pastor"
-                                    },
-                                    {
-                                        name: "Pastor Meshack",
-                                        role: "Youth Pastor",
-                                        img: "/leader-meshack.png",
-                                        fallback: "Youth Pastor"
+                                        name: "Pastor Josphine Kiamba",
+                                        role: "Associate Pastor",
+                                        img: "/leader-josphine.png",
+                                        fallback: "Associate Pastor"
                                     },
                                     {
                                         name: "Rev. Kalulu",
-                                        role: "Pastor",
+                                        role: "Associate Pastor",
                                         img: "/leader-kalulu.png",
-                                        fallback: "Pastor"
+                                        fallback: "Associate Pastor"
+                                    },
+                                    {
+                                        name: "<<<>>>",
+                                        role: "Youth Pastor",
+                                        img: "/leader-youth.png",
+                                        fallback: "Youth Pastor"
                                     }
                                 ].map((pastor, i) => (
                                     <div
@@ -1001,7 +1001,7 @@ return (
                                     letterSpacing: "0.5px"
                                 }}
                             >
-                                Official Staffs & Executive Committee
+                                Executive Council & Chair lady
                             </div>
 
                             <div
@@ -1014,34 +1014,30 @@ return (
                             >
                                 {[
                                     {
-                                        name: "Mr. Peter Maina",
-                                        role: "Church Administrator",
+                                        name: "Rev. fredrick kiema",
+                                        role: "Chair of the Executive Council",
+                                        img: "/leader-chair.png"
+                                    },
+                                    
+                                    {
+                                        name: "Mr paul sila",
+                                        role: "vice chair of the Executive Council",
+                                        img: "/leader-vicechair.png"
+                                    },
+                                    {
+                                        name: "Mr. Samuel Muthama",
+                                        role: "Administrator/secretary",
                                         img: "/leader-admin.png"
                                     },
                                     {
-                                        name: "Mr. Samuel Njoroge",
-                                        role: "Assistant Administrator",
-                                        img: "/leader-admin-asst.png"
-                                    },
-                                    {
-                                        name: "Mrs. Grace Achieng",
-                                        role: "Church Secretary",
-                                        img: "/leader-secretary.png"
-                                    },
-                                    {
-                                        name: "Mr. James Ochieng",
-                                        role: "Church Treasurer",
-                                        img: "/leader-treasurer.png"
-                                    },
-                                    {
                                         name: "Mr. David Odhiambo",
-                                        role: "Assistant Treasurer",
-                                        img: "/leader-treasurer-asst.png"
+                                        role: "Assistant Administrator/treasurer",
+                                        img: "/leader-assadmin-asst.png"
                                     },
                                     {
                                         name: "Mr. John Karimi",
-                                        role: "Church Chairman",
-                                        img: "/leader-chairman.png"
+                                        role: "Treasurer",
+                                        img: "/leade-treasurer.png"
                                     },
                                     {
                                         name: "Mrs. Esther Wanjiku",
