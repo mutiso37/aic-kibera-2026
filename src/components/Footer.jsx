@@ -34,7 +34,7 @@ export default function Footer() {
                 {/* Column 3: Contact Info */}
                 <div style={{ flex: '1', minWidth: '200px' }}>
                     <h3 style={{ color: '#fff', marginBottom: '1.2rem', fontSize: '18px', borderBottom: '2px solid #b71c1c', paddingBottom: '8px', display: 'inline-block' }}>Contact Info</h3>
-                    <p style={{ color: '#bbb', marginBottom: '10px' }}><i className="fa-solid fa-phone" style={{ color: '#b71c1c', marginRight: '8px' }}></i> +254 757 127 975</p>
+                    <p style={{ color: '#bbb', marginBottom: '10px' }}><i className="fa-solid fa-phone" style={{ color: '#b71c1c', marginRight: '8px' }}></i> +254 725436394</p>
                     <p style={{ color: '#bbb', marginBottom: '10px' }}><i className="fa-solid fa-envelope" style={{ color: '#b71c1c', marginRight: '8px' }}></i> info@aickibera.org</p>
                     <p style={{ color: '#bbb', marginBottom: '10px' }}><i className="fa-solid fa-location-dot" style={{ color: '#b71c1c', marginRight: '8px' }}></i> Kibera Drive, Off Ngong Rd, Nairobi</p>
                 </div>
