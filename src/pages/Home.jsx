@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar.jsx';
-import Footer from '../components/Footer.jsx';
-import WhatsAppFloat from '../components/WhatsAppFloat.jsx';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppFloat from '../components/WhatsAppFloat';
+
 export default function Home() {
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -293,17 +294,17 @@ export default function Home() {
                     {
                         icon: 'fa-calendar-days',
                         title: 'Sunday Worship',
-                        desc: '9:00 AM – 12:00 PM'
+                        desc: '9:00 AM – 1:00 PM'
                     },
                     {
                         icon: 'fa-book-bible',
                         title: 'Bible Study',
-                        desc: 'Wednesday 6:00 PM'
+                        
                     },
                     {
                         icon: 'fa-hands-praying',
-                        title: 'Prayer Meeting',
-                        desc: 'Friday 6:00 PM'
+                        title: 'Prayers',
+                        desc: 'Every thursday 6:00 PM - 7:00 PM'
                     },
                     {
                         icon: 'fa-location-dot',
@@ -367,7 +368,7 @@ export default function Home() {
                                         marginTop: '4px'
                                     }}
                                 >
-                                    Get Directions →
+                                
                                 </Link>
                             )}
                         </div>
@@ -426,7 +427,7 @@ export default function Home() {
                             textDecoration: 'none'
                         }}
                     >
-                        View All Announcements →
+                        
                     </Link>
                 </div>
 
@@ -1334,22 +1335,21 @@ export default function Home() {
                     >
                         {[
                             {
-                                date: 'AUG 25',
-                                title: 'Youth Conference 2025',
-                                time: '10:00 AM - 4:00 PM',
-                                link: '/events/youth-conference'
-                            },
-                            {
-                                date: 'SEP 07',
-                                title: 'Baptism Service',
-                                time: '9:00 AM - 12:00 PM',
+                                date: 'NOV 22',
+                                title: 'Baptisim and dedication service',
+                                time: '6:00 AM - 1:00 PM',
                                 link: '/events/baptism-service'
                             },
                             {
-                                date: 'SEP 14',
-                                title: 'Thanksgiving Service',
+                                date: 'NOV 29th - DEC 4th',
+                                title: 'youth camp',
+                                link: '/events/youth-camp'
+                            },
+                            {
+                                date: 'DEC 13th',
+                                title: 'Christmas CarolS',
                                 time: '9:00 AM - 1:00 PM',
-                                link: '/events/thanksgiving'
+                                link: '/events/christmas-carols'
                             }
                         ].map((ev, idx) => (
                             <Link
