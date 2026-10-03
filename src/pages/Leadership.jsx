@@ -33,19 +33,24 @@ const leadershipSlides = [
 
 const pastoralTeam = [
     {
-        name: 'Rev. Dr. John Kamau',
+        name: 'Rev. Fredrick kiema',
         role: 'Resident Reverend',
         image: '/pastor.jpg',
         bio: 'Provides overall spiritual leadership, pastoral care, preaching, discipleship and direction of the church ministry.',
-        education: 'Education background to be updated with verified qualifications.',
         started: 'Service at A.I.C. Kibera: Year to be confirmed.'
     },
     {
-        name: 'Pastor David Otieno',
+        name: 'Pastor Josphine Kiamba',
         role: 'Associate Pastor',
         image: '/placeholder-leader.jpg',
         bio: 'Supports the pastoral ministry and coordinates church programs, departments and congregational activities.',
-        education: 'Education background to be updated with verified qualifications.',
+        started: 'Service at A.I.C. Kibera: Year to be confirmed.'
+    },
+    {
+        name: 'Rev. Mathew Kalulu',
+        role: 'Associate Pastor',
+        image: '/placeholder-leader.jpg',
+        bio: 'Supports the pastoral ministry and coordinates church programs, departments and congregational activities.',
         started: 'Service at A.I.C. Kibera: Year to be confirmed.'
     }
 ];
@@ -83,7 +88,6 @@ const deacons = [
         role: 'Head Deacon & Treasurer',
         image: '/leader-deacon-james.jpg',
         bio: 'Supports church administration, stewardship, financial accountability and practical service within the congregation.',
-        education: 'Education background to be updated with verified qualifications.',
         started: 'Service at A.I.C. Kibera: Year to be confirmed.'
     },
     {
@@ -91,25 +95,25 @@ const deacons = [
         role: 'Head Deaconess',
         image: '/leader-deaconess-mary.jpg',
         bio: 'Coordinates hospitality, welfare, benevolence and practical ministry to members and visitors.',
-        education: 'Education background to be updated with verified qualifications.',
         started: 'Service at A.I.C. Kibera: Year to be confirmed.'
     }
 ];
 
 const councils = [
     {
-        name: 'Women Leadership Council',
-        role: 'Women Representatives',
-        image: '/leader-wlc.jpg',
-        bio: 'Provides leadership for women’s ministry, mentorship, fellowship, welfare and spiritual development.',
-        education: 'Leadership and education information to be updated.',
-        started: 'Service period to be confirmed.'
-    },
-    {
         name: 'Local Church Council',
         role: 'Executive Committee',
         image: '/leader-lcc.jpg',
         bio: 'Provides governance and oversight for church programs, policies, planning, budgets and congregational affairs.',
+        education: 'Leadership and education information to be updated.',
+        started: 'Service period to be confirmed.'
+       
+    },
+    {
+        name: 'Local Church Council',
+        role: ' Women Representatives',
+        image: '/leader-wlc.jpg',
+         bio: 'Provides leadership for women’s ministry, mentorship, fellowship, welfare and spiritual development.',
         education: 'Leadership and education information to be updated.',
         started: 'Service period to be confirmed.'
     }
